@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/Tudwall/TOP-game-jam#readme",
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "babel-jest": "^27.0.6",
     "jest": "^27.0.6",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2"
