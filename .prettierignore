@@ -4,3 +4,5 @@ package-lock.json
 package.json
 README.md
 webpack.config.js
+.prettierrc.json
+/dist/main.js
