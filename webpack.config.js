@@ -2,6 +2,9 @@ const path = require('path');
 
 module.exports = {
     devtool: 'source-map',
+    devServer: {
+        contentBase: "./dist",
+    },
     entry: './src/js/index.js',
     output: {
         filename: 'main.js',
