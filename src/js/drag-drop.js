@@ -4,6 +4,7 @@ const makeDraggable = (element) => {
   element.classList.add("draggable");
 
   const startDrag = (event) => {
+    event.preventDefault();
     /*  shiftX and shiftY needed so that mouse stays exactly
         on position where element was clicked at on dragStart */
     const shiftX = event.pageX - element.getBoundingClientRect().left;
@@ -48,16 +49,15 @@ export { makeDraggable };
 // -------------------------- dropping --------------------------
 
 const makeDroppable = (draggable, container, doOndrop) => {
-  // Get side positions of container relative to page
-  const topCon = container.getBoundingClientRect().top;
-  const bottomCon = container.getBoundingClientRect().bottom;
-  const leftCon = container.getBoundingClientRect().left;
-  const rightCon = container.getBoundingClientRect().right;
-
   let insideContainer = false;
 
   // Function below runs every time draggable moved a bit
   const callback = () => {
+    // Get side positions of container relative to page
+    const topCon = container.getBoundingClientRect().top;
+    const bottomCon = container.getBoundingClientRect().bottom;
+    const leftCon = container.getBoundingClientRect().left;
+    const rightCon = container.getBoundingClientRect().right;
     // Get side positions of draggable relative to page
     const topEl = draggable.getBoundingClientRect().top;
     const bottomEl = draggable.getBoundingClientRect().bottom;
