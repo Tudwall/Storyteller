@@ -20,13 +20,4 @@ const startingPage = (renderFunction, HtPRenderFunction) => {
     return { title, desc, startGameBtn, HtPBtn }
 }
 
-const renderStartingPage = (() => {
-    const content = document.querySelector("#content");
-
-    content.appendChild(startingPage.title);
-    content.appendChild(startingPage.desc);
-    content.appendChild(startingPage.startGameBtn);
-    // HtPBtn will be rendered as a separate component.
-})();
-
 export { startingPage }
