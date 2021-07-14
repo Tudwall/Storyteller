@@ -17,7 +17,15 @@ const startingPage = (renderFunction, HtPRenderFunction) => {
     HtPBtn.textContent = "How to play";
     HtPBtn.addEventListener("click", HtPRenderFunction);
 
-    return { title, desc, startGameBtn, HtPBtn }
+    const mainMenu = document.createElement("div");
+    mainMenu.id("main-menu");
+
+    mainMenu.appendChild(title);
+    mainMenu.appendChild(desc);
+    mainMenu.appendChild(startGameBtn);
+    mainMenu.appendChild(HtPBtn);
+
+    return { mainMenu }
 }
 
 export { startingPage }
