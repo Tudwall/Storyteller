@@ -50,14 +50,18 @@ export { makeDraggable };
 
 const makeDroppable = (draggable, container, doOndrop) => {
   let insideContainer = false;
+  let topCon;
+  let bottomCon;
+  let leftCon;
+  let rightCon;
 
   // Function below runs every time draggable moved a bit
   const callback = () => {
     // Get side positions of container relative to page
-    const topCon = container.getBoundingClientRect().top;
-    const bottomCon = container.getBoundingClientRect().bottom;
-    const leftCon = container.getBoundingClientRect().left;
-    const rightCon = container.getBoundingClientRect().right;
+    topCon = container.getBoundingClientRect().top;
+    bottomCon = container.getBoundingClientRect().bottom;
+    leftCon = container.getBoundingClientRect().left;
+    rightCon = container.getBoundingClientRect().right;
     // Get side positions of draggable relative to page
     const topEl = draggable.getBoundingClientRect().top;
     const bottomEl = draggable.getBoundingClientRect().bottom;
