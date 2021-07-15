@@ -23,3 +23,11 @@ const quizComponent = (quizInfo) => {
 
     quiz.appendChild(submitBtn);
 }
+
+/***********************  dummy quizInfo ***********************
+quizInfo = {
+    question: "This is the question?",
+    answer: 1, // index of the correct answer in the choices array.
+    choices: ["Choice 1", "Choice 2", "Choice 3"],
+}
+*/
