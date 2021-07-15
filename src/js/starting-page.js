@@ -25,7 +25,7 @@ const startingPage = (renderFunction, HtPRenderFunction) => {
     mainMenu.appendChild(startGameBtn);
     mainMenu.appendChild(HtPBtn);
 
-    return { mainMenu }
+    return mainMenu
 }
 
 export { startingPage }
