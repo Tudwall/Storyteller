@@ -22,6 +22,8 @@ const quizComponent = (quizInfo) => {
     });
 
     quiz.appendChild(submitBtn);
+
+    return { quiz }
 }
 
 /***********************  dummy quizInfo ***********************
