@@ -16,14 +16,14 @@ const quizComponent = (quizInfo) => {
     choices.forEach(choice => {
         const answer = document.createElement("input");
         answer.setAttribute("type", "radio");
-        answer.id = `data-${indexOf(choice)}`;
+        answer.setAttribute("data-i", indexOf(choice));
         answer.textContent = choice;
         quiz.appendChild(answer);
     });
 
     quiz.appendChild(submitBtn);
 
-    return { quiz }
+    return quiz
 }
 
 /***********************  dummy quizInfo ***********************
