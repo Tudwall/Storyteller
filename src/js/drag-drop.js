@@ -53,7 +53,6 @@ const makeDroppable = (draggable, container, doOndrop) => {
   let topCon;
   let bottomCon;
   let leftCon;
-  let rightCon;
 
   // Function below runs every time draggable moved a bit
   const callback = () => {
@@ -61,36 +60,27 @@ const makeDroppable = (draggable, container, doOndrop) => {
     topCon = container.getBoundingClientRect().top;
     bottomCon = container.getBoundingClientRect().bottom;
     leftCon = container.getBoundingClientRect().left;
-    rightCon = container.getBoundingClientRect().right;
     // Get side positions of draggable relative to page
     const topEl = draggable.getBoundingClientRect().top;
     const bottomEl = draggable.getBoundingClientRect().bottom;
     const leftEl = draggable.getBoundingClientRect().left;
-    const rightEl = draggable.getBoundingClientRect().right;
+
+    // Get x and y position from circle center points
+    const radiusCon = (bottomCon - topCon) / 2;
+    const centerYCon = topCon + radiusCon;
+    const centerXCon = leftCon + radiusCon;
+
+    const radiusEl = (bottomEl - topEl) / 2;
+    const centerYEl = topEl + radiusEl;
+    const centerXEl = leftEl + radiusEl;
+
+    //Calculate distance between circle center points
+    const offsetY = Math.abs(centerYCon - centerYEl);
+    const offsetX = Math.abs(centerXCon - centerXEl);
+    const distance = Math.sqrt(offsetY ** 2 + offsetX ** 2);
 
     // Check if a part of draggable is inside container
-    if (
-      // If righttop part is inside container
-      (rightEl > leftCon &&
-        rightEl < rightCon &&
-        topEl > topCon &&
-        topEl < bottomCon) ||
-      // Or if lefttop part is inside container
-      (leftEl > leftCon &&
-        leftEl < rightCon &&
-        topEl > topCon &&
-        topEl < bottomCon) ||
-      // Or if rightBottom part is inside container
-      (rightEl > leftCon &&
-        rightEl < rightCon &&
-        bottomEl > topCon &&
-        bottomEl < bottomCon) ||
-      // Or if leftBottom part is inside container
-      (leftEl > leftCon &&
-        leftEl < rightCon &&
-        bottomEl > topCon &&
-        bottomEl < bottomCon)
-    ) {
+    if (distance < radiusCon + radiusEl) {
       insideContainer = true;
       container.classList.add("drop-effect");
     } else {
