@@ -1,16 +1,16 @@
 const Chapter = (story, images, question, chapterNumber) => {
   let completed = false;
 
-  const setCompletitionStatus = () => (completed = !completed);
-  const getCompletitionStatus = () => completed;
+  const setCompletionStatus = () => (completed = !completed);
+  const getCompletionStatus = () => completed;
   const getStory = () => story;
   const getImages = () => images;
   const getQuestion = () => question;
   const getChapterNumber = () => chapterNumber;
 
   return {
-    setCompletitionStatus,
-    getCompletitionStatus,
+    setCompletionStatus,
+    getCompletionStatus,
     getStory,
     getImages,
     getQuestion,
