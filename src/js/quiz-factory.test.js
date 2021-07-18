@@ -3,7 +3,12 @@ import Quiz from "./quiz-factory";
 let quiz1;
 
 beforeEach(() => {
-  quiz1 = Quiz("question1", ["choice1", "choice2", "choice3"], 1, false);
+  const question = "question1";
+  const choices = ["choice1", "choice2", "choice3"];
+  const correctAnswerIndex = 1;
+  const passed = false;
+
+  quiz1 = Quiz(question, choices, correctAnswerIndex, passed);
 });
 
 test("getQuestion returns the set question", () => {
