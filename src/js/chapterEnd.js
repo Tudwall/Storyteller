@@ -5,16 +5,16 @@ const createChapterEnd = (chapterNumber, quiz, nextPage, homePage) => {
     const base = document.createElement("div");
     base.setAttribute('id', 'chapter-end')
 
-    let text = document.createElement("p");
+    const text = document.createElement("p");
     text.textContent = `Chapter ${chapterNumber} complete!`
 
-    let nextButton = document.createElement("button");
+    const nextButton = document.createElement("button");
     nextButton.textContent = `Next Chapter`;
     nextButton.addEventListener("click", () => {
         //renderContent(nextPage)
     })
 
-    let homeButton = document.createElement("button");
+    const homeButton = document.createElement("button");
     homeButton.textContent = `Back To Home`;
     homeButton.addEventListener("click", () => {
         //renderContent(homePage)
