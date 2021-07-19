@@ -25,8 +25,6 @@ const makeDraggable = (element) => {
   element.addEventListener("mousedown", startDrag);
 };
 
-export { makeDraggable };
-
 /* ***************** How to use makeDraggable *****************
 1. Select or create an element which you want to make draggable. 
 
