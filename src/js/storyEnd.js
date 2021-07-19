@@ -3,15 +3,15 @@
 //should implement a quiz in the future. 
 
 function createStoryEnd(storyTitle, quiz, homePage) {
-    let base = document.createElement("div");
+    const base = document.createElement("div");
 
-    let title = document.createElement("h1");
+    const title = document.createElement("h1");
     title.textContent = `${storyTitle}`
 
-    let description = document.createElement("p");
+    const description = document.createElement("p");
     description.textContent = "Congratulations! You have completed the story."
 
-    let homeButton = document.createElement("button");
+    const homeButton = document.createElement("button");
     homeButton.textContent = `Back To Home`;
     homeButton.addEventListener("click", () => {
         //renderContent(homePage)
