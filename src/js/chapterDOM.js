@@ -1,4 +1,5 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
+import { gameLogic } from "./logic";
 
 const createChapterStructure = (chapterObj) => {
   const createButtons = () => {
@@ -31,9 +32,9 @@ const createChapterStructure = (chapterObj) => {
     }
 
     makeDroppable(
-      //Selector for correct picture,
-      gallery.querySelector(".drop-container")
-      //callback
+      gallery.querySelector(".right"),
+      gallery.querySelector(".drop-container"),
+      () => gameLogic.displayChapterEnd(chapterObj)
     );
 
     return gallery;
@@ -46,6 +47,7 @@ const createChapterStructure = (chapterObj) => {
     const question = document.createElement("p");
     const images = setupImages();
 
+    nextChapterButton.style.visibility = "hidden";
     story.textContent = chapterObj.getStory();
     question.textContent = chapterObj.getQuestion();
 
