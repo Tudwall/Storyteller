@@ -59,6 +59,7 @@ const quizComponent = (quizInfo) => {
     });
 
     form.appendChild(submitBtn);
+    quiz.appendChild(nextChapterBtn);
     quiz.appendChild(form);
    
 
