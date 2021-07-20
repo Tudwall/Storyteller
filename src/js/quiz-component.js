@@ -10,7 +10,8 @@ const quizComponent = (quizInfo) => {
     const submitBtn = document.createElement("button");
     submitBtn.id = "submit-btn";
     submitBtn.textContent = "Submit my answer!";
-
+    
+    // Here goes the function declared in the game logic module. Which handles the good and bad answers.
     // submitBtn.addEventListener("click", answerHandler);
 
     const quiz = document.createElement("div");
@@ -19,6 +20,25 @@ const quizComponent = (quizInfo) => {
   
     const form = document.createElement("form");
     form.id = "answers";
+
+    const nextChapterBtn = document.createElement("button");
+    nextChapterBtn.id = "next-chapter-btn";
+    nextChapterBtn.textContent = "Next chapter!";
+
+    // Here goes the function that links to the next chapter.
+    // nextChapterBtn.addEventListener("click", nextChapterFunction);
+
+    /* Passed is defined in the gamelogic component.
+    Will need to change the way it's called here. */
+    if (passed) {
+        nextChapterBtn.style.display = "block";
+        const congratulationMsg = document.createElement("p");
+        congratulationMsg.id = "congratulation-msg";
+        congratulationMsg.textContent = "Congratulations! You passed this quiz!"
+     } else {
+         nextChapterBtn.style.display = "none";
+     }
+ 
   
     form.appendChild(question); 
 
