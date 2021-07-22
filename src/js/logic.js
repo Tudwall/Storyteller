@@ -1,33 +1,43 @@
-import { storyObj } from "./index";
 import { render } from "./render";
 import { createChapterStructure } from "./chapterDOM";
 import { createChapterEnd } from "./chapterEnd";
+import { createStoryEnd } from "./storyEnd";
 
-const gameLogic = (() => {
-  //This function is our callback for drag and drop.
+const gameLogic = (story) => {
+  const startFirstChapter = () => {
+    const firstChapter = story.findFirstChapter();
+    return createChapterStructure(firstChapter, displayChapterEnd);
+  };
+
+  const endStory = () => {
+    const storyTitle = story.getTitle();
+    return createStoryEnd(storyTitle);
+  };
+
+  //For now this is our callback for drag and drop
   const displayChapterEnd = (chapter) => {
     const chapterNumber = chapter.getChapterNumber();
     const quiz = "Quiz";
-    const nextChapter = goToNextChapter(chapter).setupChapterPage();
+    const nextChapter = goToNextChapter(chapter);
     const chapterEnd = createChapterEnd(chapterNumber, quiz, nextChapter);
 
     render(chapterEnd);
   };
 
   const goToNextChapter = (chapter) => {
-    chapter.setCompletitionStatus();
+    chapter.setCompletionStatus();
     //player.setScore = player.getScore() + 1;
 
-    const nextChapter = storyObj.findNextChapter(chapter);
+    const nextChapter = story.findNextChapter(chapter);
 
     if (nextChapter) {
-      return createChapterStructure(nextChapter);
+      return createChapterStructure(nextChapter, displayChapterEnd);
     } else {
-      alert("END!");
+      return endStory();
     }
   };
 
-  return { displayChapterEnd, goToNextChapter };
-})();
+  return { startFirstChapter };
+};
 
 export { gameLogic };
