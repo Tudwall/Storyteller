@@ -1,7 +1,7 @@
 @import "reset.css";
 
 .hide {
-    display: none;
+  display: none;
 }
 
 img {
@@ -25,4 +25,12 @@ img {
 
 .right {
   left: 400px;
+}
+@font-face {
+  font-family: "PWApril";
+  src: url("../PWApril.ttf");
+}
+
+body {
+  font-family: "PWApril";
 }
