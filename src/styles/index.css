@@ -1,1 +1,6 @@
 @import "reset.css";
+
+
+.hide {
+    display: none;
+}
