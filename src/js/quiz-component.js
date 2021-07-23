@@ -28,27 +28,25 @@ const quizComponent = (quizInfo) => {
     // Here goes the function that links to the next chapter.
     // nextChapterBtn.addEventListener("click", nextChapterFunction);
 
-    /* Passed is defined in the gamelogic component.
-    Will need to change the way it's called here. */
-    if (passed) {
-        nextChapterBtn.style.display = "block";
+    if (quizInfo.passed) {
+        nextChapterBtn.classList.toggle("hide");
         const congratulationMsg = document.createElement("p");
         congratulationMsg.id = "congratulation-msg";
         congratulationMsg.textContent = "Congratulations! You passed this quiz!"
      } else {
-         nextChapterBtn.style.display = "none";
+         nextChapterBtn.classList.toggle("hide");
      }
  
   
     form.appendChild(question); 
 
     const choices = quizInfo.choices;
-    choices.forEach(choice => {
+    choices.forEach((choice, i) => {
         const answer = document.createElement("input");
         answer.setAttribute("type", "radio");
-        answer.id = `choice-${choices.indexOf(choice)}`;
+        answer.id = `choice-${i}`;
         answer.setAttribute("name", "answer");
-        answer.setAttribute("data-i", choices.indexOf(choice));
+        answer.setAttribute("data-i", i);
 
         const label = document.createElement("label");
         label.setAttribute("for", `${choice}`);
