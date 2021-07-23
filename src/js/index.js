@@ -3,7 +3,7 @@ import { startingPage } from "./starting-page";
 import { firstChapter, secondChapter, thirdChapter } from "./demo-story";
 import { render } from "./render";
 import { gameLogic } from "./logic";
-import { Story } from "./stories-factory";
+import { Story } from "./story-factory";
 
 const firstStory = Story("Cool story");
 

@@ -1,5 +1,4 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
-import { gameLogic } from "./logic";
 
 const createChapterStructure = (chapterObj, callback) => {
   const createButtons = () => {
