@@ -1,5 +1,9 @@
 @import "reset.css";
 
+.hide {
+    display: none;
+}
+
 img {
   height: 100px;
   width: 100px;
