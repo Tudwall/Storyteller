@@ -1,6 +1,28 @@
 @import "reset.css";
 
-
 .hide {
     display: none;
+}
+
+img {
+  height: 100px;
+  width: 100px;
+  margin-right: 100px;
+}
+
+.draggable {
+  position: absolute;
+  cursor: pointer;
+}
+
+.drop-effect {
+  background: green;
+}
+
+.wrong {
+  left: 200px;
+}
+
+.right {
+  left: 400px;
 }

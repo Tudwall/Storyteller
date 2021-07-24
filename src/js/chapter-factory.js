@@ -18,4 +18,4 @@ const Chapter = (story, images, question, chapterNumber) => {
   };
 };
 
-export default Chapter;
+export { Chapter };
