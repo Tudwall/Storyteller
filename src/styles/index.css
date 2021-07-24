@@ -28,9 +28,24 @@ img {
 }
 @font-face {
   font-family: "PWApril";
-  src: url("../PWApril.ttf");
+  src: url("../fonts/PWApril.ttf");
+}
+
+@font-face {
+  font-family: "SuperKid";
+  src: url("../fonts/SuperKid.ttf");
 }
 
 body {
+  font-family: "SuperKid";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "PWApril";
+  font-size: 200%;
 }
