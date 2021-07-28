@@ -1,14 +1,31 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
 
 const createChapterStructure = (chapterObj, callback) => {
+  /* This method will show images and question and hide chapter story when player
+  clicks next btn on chapter story page */
+  const hideStoryConent = () => {
+    const story = document.querySelector("p");
+    const images = document.querySelector(".images");
+    const nextButton = document.querySelector(".next");
+    const question = document.querySelector(".question");
+
+    story.classList.toggle("hide");
+    images.classList.toggle("hide");
+    nextButton.classList.toggle("hide");
+    question.classList.toggle("hide");
+  };
+
   const createButtons = () => {
     const homeButton = document.createElement("button");
     const nextChapterButton = document.createElement("button");
 
     homeButton.textContent = "home";
     homeButton.classList.add("home");
-    nextChapterButton.textContent = "-->";
+    //homeButton.addEventListener('click', showHomeScreen)
+
+    nextChapterButton.textContent = "Next";
     nextChapterButton.classList.add("next");
+    nextChapterButton.addEventListener("click", hideStoryConent);
 
     return { homeButton, nextChapterButton };
   };
@@ -16,6 +33,8 @@ const createChapterStructure = (chapterObj, callback) => {
   const setupImages = () => {
     const images = chapterObj.getImages();
     const gallery = document.createElement("div");
+
+    gallery.className = "images";
 
     for (let image of images) {
       const picture = document.createElement("img");
@@ -46,7 +65,10 @@ const createChapterStructure = (chapterObj, callback) => {
     const question = document.createElement("p");
     const images = setupImages();
 
-    nextChapterButton.style.visibility = "hidden";
+    question.className = "question";
+    question.classList.add("hide");
+    images.classList.add("hide");
+
     story.textContent = chapterObj.getStory();
     question.textContent = chapterObj.getQuestion();
 
