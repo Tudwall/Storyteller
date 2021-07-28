@@ -1,5 +1,13 @@
 @import "reset.css";
 
+section {
+  margin: 50px;
+  background-color: aqua;
+  opacity: 50%;
+  width: 500px;
+  height: 300px;
+}
+
 .hide {
   display: none;
 }

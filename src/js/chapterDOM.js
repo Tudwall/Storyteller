@@ -1,5 +1,7 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
 
+let section;
+
 const createChapterStructure = (chapterObj, callback) => {
   const createButtons = () => {
     const homeButton = document.createElement("button");
@@ -24,7 +26,7 @@ const createChapterStructure = (chapterObj, callback) => {
       picture.classList.add(image.cssClass);
 
       if (image.cssClass !== "drop-container") {
-        makeDraggable(picture);
+        makeDraggable(picture, section);
       }
 
       gallery.append(picture);
@@ -40,7 +42,7 @@ const createChapterStructure = (chapterObj, callback) => {
   };
 
   const setupChapterPage = () => {
-    const section = document.createElement("section");
+    section = document.createElement("section");
     const { homeButton, nextChapterButton } = createButtons();
     const story = document.createElement("p");
     const question = document.createElement("p");

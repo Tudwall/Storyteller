@@ -1,6 +1,6 @@
 // -------------------------- dragging --------------------------
 
-const makeDraggable = (element) => {
+const makeDraggable = (element, boundary) => {
   element.classList.add("draggable");
 
   const startDrag = (event) => {
@@ -10,9 +10,31 @@ const makeDraggable = (element) => {
     const shiftX = event.pageX - element.getBoundingClientRect().left;
     const shiftY = event.pageY - element.getBoundingClientRect().top;
 
+    // Data below needed for boundary restrictions
+    const heightEl = element.getBoundingClientRect().height;
+    const widthEl = element.getBoundingClientRect().width;
+
+    const topBound = boundary.getBoundingClientRect().top;
+    const bottomBound = boundary.getBoundingClientRect().bottom;
+    const leftBound = boundary.getBoundingClientRect().left;
+    const rightBound = boundary.getBoundingClientRect().right;
+
     const startMove = (event) => {
-      element.style.left = `${event.pageX - shiftX}px`;
-      element.style.top = `${event.pageY - shiftY}px`;
+      // Only let Element move left/right if inside boundary
+      if (
+        event.pageX - shiftX > leftBound &&
+        event.pageX - shiftX + widthEl < rightBound
+      ) {
+        element.style.left = `${event.pageX - shiftX}px`;
+      }
+
+      // Only let Element move top/bottom if inside boundary
+      if (
+        event.pageY - shiftY > topBound &&
+        event.pageY - shiftY + heightEl < bottomBound
+      ) {
+        element.style.top = `${event.pageY - shiftY}px`;
+      }
     };
 
     document.addEventListener("mousemove", startMove);
