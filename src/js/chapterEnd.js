@@ -1,7 +1,9 @@
 import { render } from "./render";
 
 //quiz will be a node that can be embedded into chapter end page.
-const createChapterEnd = (chapterNumber, quiz, nextPage, homePage) => {
+
+//I removed quiz parameter because game logic takes care of properly displaying quiz after all chapters are completed
+const createChapterEnd = (chapterNumber, nextPage, homePage) => {
   const base = document.createElement("div");
   base.setAttribute("id", "chapter-end");
 
