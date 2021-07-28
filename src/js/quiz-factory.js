@@ -16,7 +16,7 @@ const QuizSummary = (quizArray) => {
 
   for (let i=0; i < quizArray.length; i++) {
     let quiz = Quiz(quizArray[i].question, quizArray[i].choices, quizArray[i].answer);
-    quizzes.append(quiz);
+    quizzes.push(quiz);
   }
 
   const allPassed = () => {
