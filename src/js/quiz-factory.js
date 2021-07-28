@@ -10,4 +10,4 @@ const Quiz = (question, choices, answer) => {
   return { getQuestion, getChoices, getAnswer, setPassed, getPassed };
 };
 
-export default Quiz;
+export { Quiz };
