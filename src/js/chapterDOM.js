@@ -1,8 +1,8 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
 
-let section;
-
 const createChapterStructure = (chapterObj, callback) => {
+  let section;
+
   const createButtons = () => {
     const homeButton = document.createElement("button");
     const nextChapterButton = document.createElement("button");
