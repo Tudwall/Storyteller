@@ -1,8 +1,8 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
 
 const createChapterStructure = (chapterObj, callback) => {
-  /* This method will show images and question and hide chapter story when player
-  clicks next btn on chapter story page */
+  let section;
+  
   const hideStoryContent = () => {
     const story = document.querySelector("p");
     const images = document.querySelector(".images");
@@ -14,6 +14,7 @@ const createChapterStructure = (chapterObj, callback) => {
     nextButton.classList.toggle("hide");
     question.classList.toggle("hide");
   };
+
 
   const createButtons = () => {
     const homeButton = document.createElement("button");
@@ -43,7 +44,7 @@ const createChapterStructure = (chapterObj, callback) => {
       picture.classList.add(image.cssClass);
 
       if (image.cssClass !== "drop-container") {
-        makeDraggable(picture);
+        makeDraggable(picture, section);
       }
 
       gallery.append(picture);
@@ -59,7 +60,7 @@ const createChapterStructure = (chapterObj, callback) => {
   };
 
   const setupChapterPage = () => {
-    const section = document.createElement("section");
+    section = document.createElement("section");
     const { homeButton, nextChapterButton } = createButtons();
     const story = document.createElement("p");
     const question = document.createElement("p");
