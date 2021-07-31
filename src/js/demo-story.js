@@ -1,5 +1,6 @@
 //File for demo purposes, will be deleted later. Stores data for chapters.
 import { Chapter } from "./chapter-factory";
+import { Quiz } from "./quiz-factory";
 
 const story =
   "Placeholder story. Placeholder story. Placeholder story. Placeholder story. Placeholder story. Placeholder story.";
@@ -48,9 +49,12 @@ const images3 = [
   },
 ];
 
-const question = "Is it good question?";
+const question = "Which word describes the kite accurately?";
+
+const question2 = "What?";
+
 const firstChapter = Chapter(story, images, question, 1);
-const secondChapter = Chapter(story, images2, question, 2);
+const secondChapter = Chapter(story, images2, question2, 2);
 const thirdChapter = Chapter(story, images3, question, 3);
 
 export { firstChapter, secondChapter, thirdChapter };

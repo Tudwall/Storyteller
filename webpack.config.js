@@ -34,6 +34,10 @@ module.exports = {
                 },
                 ],
             },
+            {
+            test: /\.(ttf)$/,
+            type: 'asset/resource',
+            }
         ]
     }
 };
