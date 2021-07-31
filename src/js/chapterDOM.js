@@ -1,7 +1,8 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
+import homeImage from "../images/styling/home.png"
+import kite from "../images/styling/kite-rainbow.png"
 
 const createChapterStructure = (chapterObj, callback) => {
-  let section;
 
   const hideStoryContent = () => {
     const story = document.querySelector("p");
@@ -16,65 +17,78 @@ const createChapterStructure = (chapterObj, callback) => {
   };
 
   const createButtons = () => {
-    const homeButton = document.createElement("button");
-    const nextChapterButton = document.createElement("button");
-
-    homeButton.textContent = "home";
+    const homeButton = document.createElement("img");
     homeButton.classList.add("home");
+    homeButton.src = homeImage;
     //homeButton.addEventListener('click', showHomeScreen)
 
+    const nextChapterButton = document.createElement("button");
     nextChapterButton.textContent = "Next";
     nextChapterButton.classList.add("next");
     nextChapterButton.addEventListener("click", hideStoryContent);
-
+    
     return { homeButton, nextChapterButton };
   };
 
   const setupImages = () => {
+    const dragContainer = document.createElement("div");
     const images = chapterObj.getImages();
-    const gallery = document.createElement("div");
-
-    gallery.className = "images";
 
     for (let image of images) {
       const classArr = image.cssClass.split(" ");
 
       const picture = document.createElement("img");
       picture.src = image.url;
-      picture.classList.add(classArr[0]);
-      picture.classList.add(classArr[1]);
+
+      const pictureContainer = document.createElement("div");
+      pictureContainer.classList.add(classArr[0]);
+      pictureContainer.classList.add(classArr[1]);
+      pictureContainer.append(picture);
 
       if (picture.className !== "drop-container") {
-        makeDraggable(picture, section);
+        makeDraggable(pictureContainer, dragContainer);
       }
-
-      gallery.append(picture);
+      
+      dragContainer.append(pictureContainer);
     }
 
     makeDroppable(
-      gallery.querySelector(".right"),
-      gallery.querySelector(".drop-container"),
+      dragContainer.querySelector(".right"),
+      dragContainer.querySelector(".drop-container"),
       () => callback(chapterObj)
     );
 
-    return gallery;
+    return dragContainer;
   };
 
   const setupChapterPage = () => {
-    section = document.createElement("section");
     const { homeButton, nextChapterButton } = createButtons();
+    nextChapterButton.style.visibility = "hidden";
+    
+    const title = document.createElement("H1");
+    title.classList.add("chapter-title");
+    title.textContent = "Chapter 1";
+
     const story = document.createElement("p");
-    const question = document.createElement("p");
-    const images = setupImages();
-
-    question.className = "question";
-    question.classList.add("hide");
-    images.classList.add("hide");
-
+    story.classList.add("chapter-story");
     story.textContent = chapterObj.getStory();
+
+    const question = document.createElement("p");
+    question.classList.add("chapter-question");
+    question.classList.add("hide");
     question.textContent = chapterObj.getQuestion();
 
-    section.append(homeButton, nextChapterButton, story, question, images);
+    const dropBackground = document.createElement('img')
+    dropBackground.src = kite
+    dropBackground.classList.add("drop-background")
+
+    const dragContainer = setupImages();
+    dragContainer.id = "drag-container";
+    dragContainer.append(homeButton, nextChapterButton, title, story, question, dropBackground);
+    images.classList.add("hide");
+    
+    const section = document.createElement("section");
+    section.append(dragContainer);
 
     return section;
   };
