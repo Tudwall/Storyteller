@@ -171,6 +171,7 @@ img {
   width: 105px;
   height: 105px;
   border-radius: 50%;
+  box-shadow: 2px 2px #40221849;
 }
 
 .wrong,
