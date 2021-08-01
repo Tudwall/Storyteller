@@ -6,7 +6,7 @@ import newspaper from "../../../images/dnd/1.2/newspaper.svg";
 import paper from "../../../images/dnd/1.2/paper.svg";
 import fabric from "../../../images/dnd/1.2/fabric.svg";
 import book from "../../../images/dnd/1.2/book.svg";
-import kiteWhite from "../../../images/dnd/1.3/kite-white.svg";
+import kitePink from "../../../images/dnd/1.3/kite-pink.svg";
 import kiteRainbow from "../../../images/dnd/1.3/kite-rainbow.svg";
 import kiteOrange from "../../../images/dnd/1.3/kite-orange.svg";
 import kiteBlue from "../../../images/dnd/1.3/kite-blue.svg";
@@ -36,9 +36,9 @@ const chapterTwoImages = [
 ];
 
 const chapterThreeImages = [
-  { cssClass: "drop-container", url: kiteWhite },
-  { cssClass: "right", url: kiteWhite },
-  { cssClass: "wrong", url: kiteRainbow },
+  { cssClass: "drop-container", url: kiteRainbow },
+  { cssClass: "right", url: kiteRainbow },
+  { cssClass: "wrong", url: kitePink },
   { cssClass: "wrong", url: kiteOrange },
   { cssClass: "wrong", url: kiteBlue },
 ];
