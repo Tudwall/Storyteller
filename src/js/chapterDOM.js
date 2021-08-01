@@ -2,7 +2,7 @@ import { makeDraggable, makeDroppable } from "./drag-drop";
 
 const createChapterStructure = (chapterObj, callback) => {
   let section;
-  
+
   const hideStoryContent = () => {
     const story = document.querySelector("p");
     const images = document.querySelector(".images");
@@ -14,7 +14,6 @@ const createChapterStructure = (chapterObj, callback) => {
     nextButton.classList.toggle("hide");
     question.classList.toggle("hide");
   };
-
 
   const createButtons = () => {
     const homeButton = document.createElement("button");
@@ -38,12 +37,14 @@ const createChapterStructure = (chapterObj, callback) => {
     gallery.className = "images";
 
     for (let image of images) {
+      const classArr = image.cssClass.split(" ");
+
       const picture = document.createElement("img");
-
       picture.src = image.url;
-      picture.classList.add(image.cssClass);
+      picture.classList.add(classArr[0]);
+      picture.classList.add(classArr[1]);
 
-      if (image.cssClass !== "drop-container") {
+      if (picture.className !== "drop-container") {
         makeDraggable(picture, section);
       }
 

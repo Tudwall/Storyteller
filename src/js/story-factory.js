@@ -1,11 +1,4 @@
-/* Removed findFirstChapter. Added chapters sorting in addChapters method. I added getCurrentChapter which is more felxible because find method
-always returns first element that meets given requirements so in every new story this element is first chapter (thanks to sort method) and it 
-also finds first chapter which completion status is false.
-
-I added quiz parameter since i realized how and when quizes should be displayed, then it makes sense to pass all story quizzes when we initialize
-new story object. Also, like i wrote in game logic - getFinalQuizzes probably shold be changed to method similar to getCurrentChapter.
- */
-const Story = (title, ...quiz) => {
+const Story = (title, quizzes) => {
   let chapters = [];
   let completed = false;
 
@@ -14,7 +7,6 @@ const Story = (title, ...quiz) => {
       chapters.push(data);
     });
 
-    /* For new method getCurrentChapter to work chapters array need to be sorted by chapters numbers */
     chapters.sort((a, b) => {
       return a.getChapterNumber() - b.getChapterNumber();
     });
@@ -40,12 +32,9 @@ const Story = (title, ...quiz) => {
   };
 
   const getFinalQuizzes = () => {
-    return quiz.reduce((acc, cur, i) => {
-      if (i % 2 === 0) {
-        acc.push(cur);
-      }
-      return acc;
-    }, []);
+    return quizzes.find((quiz) => {
+      return quiz.getPassed() === false;
+    });
   };
 
   const getTitle = () => title;

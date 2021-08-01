@@ -5,12 +5,7 @@ import { createStoryEnd } from "./storyEnd";
 import { quizComponent } from "./quiz-component";
 
 const gameLogic = (story) => {
-  /* getFinalQuzzes returns new array of quizes. Since this array dosen't exist in
-  story-factory, gameLogic needs to store array of quizes in itself to enable startStoryQuiz
-  udpating quizzes completion status. Also if we won't change how game gets quizes, there will be
-  code repetition in checkQuizAnswer and  startStoryQuiz. My suggestion - change how we get quizzes to
-  something similar to getCurrentChapter and just render all quizzes instead few of them. */
-  const getQuizData = story.getFinalQuizzes();
+  let answerCounter = 0;
 
   const startFirstChapter = () => {
     const firstChapter = story.getCurrentChapter();
@@ -23,38 +18,38 @@ const gameLogic = (story) => {
   };
 
   const checkQuizAnswer = (quiz) => {
-    const checkedInput = document.querySelectorAll('input[type="radio"]');
+    const checkedInput = document.querySelector('input[type="radio"]:checked');
     const rightAnswer = quiz.getAnswer();
+    const storyEnd = endStory();
 
-    let answerValue;
-
-    for (let i = 0; i < checkedInput.length; i++) {
-      if (checkedInput[i].checked) {
-        answerValue = checkedInput[i].dataset.answer;
-      }
-    }
+    let answerValue = checkedInput.dataset.answer;
 
     if (rightAnswer === answerValue) {
-      //quiz.setPassed();
-      //story.setCompletionStatus();
-      const getQuiz = getQuizData.find((quiz) => quiz.getPassed() === false);
+      quiz.setPassed();
+      const getQuiz = story.getFinalQuizzes();
 
       if (!getQuiz) {
-        render(endStory());
+        story.setCompletionStatus();
+        render(storyEnd);
       } else {
         startStoryQuiz();
       }
     } else {
-      alert("WRONG");
+      if (answerCounter < 2) {
+        answerCounter++;
+        alert("Wrong answer, try again");
+      } else {
+        alert(`Right answer was ${rightAnswer}`);
+        answerCounter = 0;
+        render(storyEnd);
+      }
     }
   };
 
   const startStoryQuiz = () => {
-    const getQuiz = getQuizData.find((quiz) => quiz.getPassed() === false);
-    const index = getQuizData.indexOf(getQuiz);
-    getQuizData[index].setPassed();
-
+    const getQuiz = story.getFinalQuizzes();
     const displayQuiz = quizComponent(getQuiz, checkQuizAnswer);
+
     render(displayQuiz);
   };
 
