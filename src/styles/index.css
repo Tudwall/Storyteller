@@ -1,11 +1,46 @@
 @import "reset.css";
 
+@font-face {
+  font-family: "PWApril";
+  src: url("../fonts/PWApril.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SuperKid";
+  src: url("../fonts/SuperKid.ttf") format("truetype");
+}
+
+body,
+button {
+  font-family: "SuperKid", "Brush Script MT", cursive;
+}
+
+body {
+  background-color: #c68b59;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "PWApril", "Brush Script MT", cursive;
+  font-size: 200%;
+}
+
 section {
   margin: 50px;
   background-color: aqua;
   opacity: 50%;
   width: 500px;
   height: 300px;
+}
+
+img {
+  height: 100px;
+  width: 100px;
+  margin-right: 100px;
 }
 
 #main-menu {
@@ -62,12 +97,6 @@ section {
   display: none;
 }
 
-img {
-  height: 100px;
-  width: 100px;
-  margin-right: 100px;
-}
-
 .draggable {
   position: absolute;
   cursor: pointer;
@@ -83,32 +112,4 @@ img {
 
 .right {
   left: 400px;
-}
-@font-face {
-  font-family: "PWApril";
-  src: url("../fonts/PWApril.ttf");
-}
-
-@font-face {
-  font-family: "SuperKid";
-  src: url("../fonts/SuperKid.ttf");
-}
-
-body,
-button {
-  font-family: "SuperKid";
-}
-
-body {
-  background-color: #c68b59;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "PWApril";
-  font-size: 200%;
 }
