@@ -3,7 +3,7 @@ import Chapter from "./chapter-factory";
 let chapter1;
 
 beforeEach(() => {
-  chapter1 = Chapter("chapter1Story", ["src1", "src2"], "chapter1Question", 1);
+  chapter1 = Chapter("chapter1Story", 1, ["src1", "src2"], "chapter1Question");
 });
 
 test("setCompletionStatus toogles from false to true", () => {
