@@ -114,44 +114,35 @@ section {
 }
 
 .chapter-story, .chapter-question {
+  grid-column: 2 / 10;
   font-size: 25px;
   color: #402218;
   text-shadow: 1px 1px rgba(255, 255, 255, 0.5);
-  margin-top: 40px;
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 .chapter-story {
   grid-row: 3 / 5;
-  grid-column: 1 / 11;
-  margin-right: 20px;
+  margin-top: 40px;
 }
 
 .chapter-question {
   grid-row: 3 / 5;
-  grid-column: 1 / 6;
 }
 
 img {
-  height: 70px;
-  width: 70px;
+  height: 90px;
+  width: 90px;
 }
 
 .drop-container {
-  grid-row: 7 / 8;
-  grid-column: 3 / 4;
+  grid-row: 8 / 9;
+  grid-column: 2 / 3;
 }
 
 .drop-container img {
   opacity: 0;
-}
-
-.drop-background {
-  grid-row: 7 / 8;
-  grid-column: 2 /3;
-  width: 280px;
-  height: 280px;
-  margin-bottom: 20px;
 }
 
 .wrong,
@@ -161,8 +152,8 @@ img {
   justify-content: center;
   align-items: center;
   background-color: white;
-  width: 105px;
-  height: 105px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   box-shadow: 2px 2px #40221849;
 }

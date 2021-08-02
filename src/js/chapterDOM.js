@@ -1,6 +1,5 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
 import homeImage from "../images/styling/home.png"
-import kite from "../images/styling/kite-rainbow.png"
 
 const createChapterStructure = (chapterObj, callback) => {
   let dragContainer; 
@@ -80,13 +79,9 @@ const createChapterStructure = (chapterObj, callback) => {
     question.classList.add("hide");
     question.textContent = chapterObj.getQuestion();
 
-    const dropBackground = document.createElement('img')
-    dropBackground.src = kite
-    dropBackground.classList.add("drop-background")
-
     const dragContainer = setupImages();
     dragContainer.id = "drag-container";
-    dragContainer.append(homeButton, nextChapterButton, title, story, question, dropBackground);
+    dragContainer.append(homeButton, nextChapterButton, title, story, question);
     
     // images.classList.add("hide");
     const images = dragContainer.querySelectorAll(".picture")
