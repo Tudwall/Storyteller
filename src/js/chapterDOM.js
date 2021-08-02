@@ -1,10 +1,6 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
-import { startingPage } from "./starting-page";
-import { render } from "./render";
-import { gameLogic } from "./logic";
-import { kiteStory } from "./stories/kite-story";
 
-const createChapterStructure = (chapterObj, callback) => {
+const createChapterStructure = (chapterObj, callback, displayHome) => {
   let section;
 
   const hideStoryContent = () => {
@@ -26,12 +22,7 @@ const createChapterStructure = (chapterObj, callback) => {
     homeButton.textContent = "home";
     homeButton.classList.add("home");
 
-    homeButton.addEventListener("click", () => {
-      const storyLogic = gameLogic(kiteStory);
-      const storyStart = storyLogic.startFirstChapter();
-      const startPage = startingPage(() => render(storyStart));
-      render(startPage);
-    });
+    homeButton.addEventListener("click", displayHome);
 
     nextChapterButton.textContent = "Next";
     nextChapterButton.classList.add("next");

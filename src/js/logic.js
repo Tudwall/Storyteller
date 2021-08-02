@@ -3,13 +3,15 @@ import { createChapterStructure } from "./chapterDOM";
 import { createChapterEnd } from "./chapterEnd";
 import { createStoryEnd } from "./storyEnd";
 import { quizComponent } from "./quiz-component";
+import { kiteStory } from "./stories/kite-story";
+import { startingPage } from "./starting-page";
 
 const gameLogic = (story) => {
   let answerCounter = 0;
 
   const startFirstChapter = () => {
     const firstChapter = story.getCurrentChapter();
-    return createChapterStructure(firstChapter, displayChapterEnd);
+    return createChapterStructure(firstChapter, displayChapterEnd, displayHome);
   };
 
   const endStory = () => {
@@ -71,10 +73,21 @@ const gameLogic = (story) => {
     const nextChapter = story.findNextChapter();
 
     if (nextChapter) {
-      return createChapterStructure(nextChapter, displayChapterEnd);
+      return createChapterStructure(
+        nextChapter,
+        displayChapterEnd,
+        displayHome
+      );
     } else {
       return startStoryQuiz();
     }
+  };
+
+  const displayHome = () => {
+    const storyLogic = gameLogic(kiteStory);
+    const storyStart = storyLogic.startFirstChapter();
+    const startPage = startingPage(() => render(storyStart));
+    render(startPage);
   };
 
   return { startFirstChapter };
