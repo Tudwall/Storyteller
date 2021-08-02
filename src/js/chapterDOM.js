@@ -15,7 +15,7 @@ const createChapterStructure = (chapterObj, callback) => {
     question.classList.toggle("hide");
   };
 
-  const createButtons = () => {
+  const createButtons = (hasImages) => {
     const homeButton = document.createElement("button");
     const nextChapterButton = document.createElement("button");
 
@@ -25,7 +25,12 @@ const createChapterStructure = (chapterObj, callback) => {
 
     nextChapterButton.textContent = "Next";
     nextChapterButton.classList.add("next");
-    nextChapterButton.addEventListener("click", hideStoryContent);
+
+    if (hasImages) {
+      nextChapterButton.addEventListener("click", hideStoryContent);
+    } else {
+      nextChapterButton.addEventListener("click", () => callback(chapterObj));
+    }
 
     return { homeButton, nextChapterButton };
   };
@@ -62,19 +67,32 @@ const createChapterStructure = (chapterObj, callback) => {
 
   const setupChapterPage = () => {
     section = document.createElement("section");
-    const { homeButton, nextChapterButton } = createButtons();
+
     const story = document.createElement("p");
-    const question = document.createElement("p");
-    const images = setupImages();
-
-    question.className = "question";
-    question.classList.add("hide");
-    images.classList.add("hide");
-
     story.textContent = chapterObj.getStory();
-    question.textContent = chapterObj.getQuestion();
 
-    section.append(homeButton, nextChapterButton, story, question, images);
+  
+    if (chapterObj.getImages() !== null) {
+      //chapter has images and question. 
+
+      const { homeButton, nextChapterButton } = createButtons(true);
+
+      const question = document.createElement("p");
+      question.textContent = chapterObj.getQuestion();    
+      const images = setupImages();
+
+      question.className = "question";
+      question.classList.add("hide");
+      images.classList.add("hide");
+
+      section.append(homeButton, nextChapterButton, story, question, images);
+
+    } else {
+      //chapter is text only.
+      const { homeButton, nextChapterButton } = createButtons(false);
+
+      section.append(homeButton, nextChapterButton, story);
+    }
 
     return section;
   };
