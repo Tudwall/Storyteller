@@ -103,6 +103,7 @@ section {
   margin-top: 30px;
   margin-left: 40px;
   filter: brightness(0) invert(1) drop-shadow(0 0 0.75rem #402218);
+  cursor: pointer;
 }
 
 .chapter-title {
@@ -184,6 +185,15 @@ img {
   grid-row: 6 / 7;
   grid-column: 9 / 10;
 }
+
+.next {
+  grid-row: 9 / 10;
+  grid-column: 9 / 10;
+  width: 120px;
+  height: 80px;
+  cursor: pointer;
+  filter: brightness(0) invert(1) drop-shadow(0 0 0.75rem #402218);
+}    
 
 .hide {
   display: none;

@@ -1,5 +1,6 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
 import homeImage from "../images/styling/home.png"
+import arrow from "../images/styling/arrow-right.png"
 
 const createChapterStructure = (chapterObj, callback) => {
   let dragContainer; 
@@ -23,9 +24,9 @@ const createChapterStructure = (chapterObj, callback) => {
     homeButton.src = homeImage;
     //homeButton.addEventListener('click', showHomeScreen)
 
-    const nextChapterButton = document.createElement("button");
-    nextChapterButton.textContent = "Next";
+    const nextChapterButton = document.createElement("img");
     nextChapterButton.classList.add("next");
+    nextChapterButton.src = arrow;
     nextChapterButton.addEventListener("click", hideStoryContent);
     
     return { homeButton, nextChapterButton };
