@@ -69,7 +69,7 @@ const createChapterStructure = (chapterObj, callback) => {
     
     const title = document.createElement("H1");
     title.classList.add("chapter-title");
-    title.textContent = "Chapter 1";
+    title.textContent = `Chapter ${chapterObj.getChapterNumber()}`;
 
     const story = document.createElement("p");
     story.classList.add("chapter-story");
