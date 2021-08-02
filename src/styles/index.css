@@ -29,14 +29,6 @@ h6 {
   font-size: 200%;
 }
 
-section {
-  margin: 50px;
-  background-color: aqua;
-  opacity: 50%;
-  width: 500px;
-  height: 300px;
-}
-
 #main-menu {
   display: grid;
   grid-template-rows: repeat(10, 71.2px);
@@ -125,17 +117,18 @@ section {
   font-size: 25px;
   color: #402218;
   text-shadow: 1px 1px rgba(255, 255, 255, 0.5);
-  margin-top: 20px;
+  margin-top: 40px;
   margin-left: 20px;
 }
 
 .chapter-story {
   grid-row: 3 / 5;
-  grid-column: 1 / 6;
+  grid-column: 1 / 11;
+  margin-right: 20px;
 }
 
 .chapter-question {
-  grid-row: 5 / 7;
+  grid-row: 3 / 5;
   grid-column: 1 / 6;
 }
 

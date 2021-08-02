@@ -3,15 +3,17 @@ import homeImage from "../images/styling/home.png"
 import kite from "../images/styling/kite-rainbow.png"
 
 const createChapterStructure = (chapterObj, callback) => {
+  let dragContainer; 
 
   const hideStoryContent = () => {
     const story = document.querySelector("p");
-    const images = document.querySelector(".images");
+    const images = dragContainer.querySelectorAll(".picture")
     const nextButton = document.querySelector(".next");
-    const question = document.querySelector(".question");
+    const question = document.querySelector(".chapter-question");
 
+    
     story.classList.toggle("hide");
-    images.classList.toggle("hide");
+    images.forEach(img => img.classList.toggle("hide"))
     nextButton.classList.toggle("hide");
     question.classList.toggle("hide");
   };
@@ -31,7 +33,7 @@ const createChapterStructure = (chapterObj, callback) => {
   };
 
   const setupImages = () => {
-    const dragContainer = document.createElement("div");
+    dragContainer = document.createElement("div");
     const images = chapterObj.getImages();
 
     for (let image of images) {
@@ -41,6 +43,7 @@ const createChapterStructure = (chapterObj, callback) => {
       picture.src = image.url;
 
       const pictureContainer = document.createElement("div");
+      pictureContainer.classList.add("picture")
       pictureContainer.classList.add(classArr[0]);
       pictureContainer.classList.add(classArr[1]);
       pictureContainer.append(picture);
@@ -63,7 +66,6 @@ const createChapterStructure = (chapterObj, callback) => {
 
   const setupChapterPage = () => {
     const { homeButton, nextChapterButton } = createButtons();
-    nextChapterButton.style.visibility = "hidden";
     
     const title = document.createElement("H1");
     title.classList.add("chapter-title");
@@ -85,7 +87,11 @@ const createChapterStructure = (chapterObj, callback) => {
     const dragContainer = setupImages();
     dragContainer.id = "drag-container";
     dragContainer.append(homeButton, nextChapterButton, title, story, question, dropBackground);
-    images.classList.add("hide");
+    
+    // images.classList.add("hide");
+    const images = dragContainer.querySelectorAll(".picture")
+    images.forEach(img => img.classList.add("hide"))
+
     
     const section = document.createElement("section");
     section.append(dragContainer);
