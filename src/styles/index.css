@@ -201,6 +201,7 @@ img {
 
 .absolute {
   position: absolute;
+  margin: 0; 
 }
 
 .drop-effect {
