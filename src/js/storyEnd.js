@@ -2,7 +2,7 @@
 
 //should implement a quiz in the future.
 
-function createStoryEnd(storyTitle, quiz, homePage) {
+function createStoryEnd(storyTitle, quiz, displayHome) {
   const base = document.createElement("div");
 
   const title = document.createElement("h1");
@@ -13,9 +13,8 @@ function createStoryEnd(storyTitle, quiz, homePage) {
 
   const homeButton = document.createElement("button");
   homeButton.textContent = `Back To Home`;
-  homeButton.addEventListener("click", () => {
-    //renderContent(homePage)
-  });
+  homeButton.classList.add("home");
+  homeButton.addEventListener("click", displayHome);
 
   base.appendChild(title);
   base.appendChild(description);

@@ -16,7 +16,7 @@ const gameLogic = (story) => {
 
   const endStory = () => {
     const storyTitle = story.getTitle();
-    return createStoryEnd(storyTitle);
+    return createStoryEnd(storyTitle, displayHome);
   };
 
   const checkQuizAnswer = (quiz) => {
@@ -61,7 +61,11 @@ const gameLogic = (story) => {
     const nextChapter = goToNextChapter();
 
     if (nextChapter !== undefined) {
-      const chapterEnd = createChapterEnd(chapterNumber, nextChapter);
+      const chapterEnd = createChapterEnd(
+        chapterNumber,
+        nextChapter,
+        displayHome
+      );
       render(chapterEnd);
     }
   };
