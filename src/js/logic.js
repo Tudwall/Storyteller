@@ -56,19 +56,16 @@ const gameLogic = (story) => {
 
   //Callback for createChapterStructure which is passed to drag and drop
   const displayMessage = () => {
-    const currentChapter = story.getCurrentChapter();
+    const generateNextChapter = goToNextChapter();
+    const messageText =
+      "Congratulations! You finished this part of the story and now you can go to the next by clicking button below!";
 
-    const setMessage = message(() => displayChapterEnd(currentChapter));
-    render(setMessage, false);
-  };
-
-  const displayChapterEnd = (chapter) => {
-    const chapterNumber = chapter.getChapterNumber();
-    const nextChapter = goToNextChapter();
-
-    if (nextChapter !== undefined) {
-      const chapterEnd = createChapterEnd(chapterNumber, nextChapter);
-      render(chapterEnd);
+    if (generateNextChapter) {
+      const setMessage = message(
+        () => render(generateNextChapter),
+        messageText
+      );
+      render(setMessage, false);
     }
   };
 
