@@ -1,10 +1,9 @@
-const message = (chapterEnd) => {
+const message = (chapterEnd, messageContent) => {
   const messageContainer = document.createElement("div");
   messageContainer.classList.add("message-container");
 
   const message = document.createElement("p");
-  message.textContent =
-    "Congratulations, shape fits correctly! Now you can continue your story.";
+  message.textContent = messageContent;
 
   const nextBtn = document.createElement("button");
   nextBtn.textContent = "Continue";
