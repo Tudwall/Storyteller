@@ -114,7 +114,8 @@ section {
   margin-top: 40px;
 }
 
-.chapter-story, .chapter-question {
+.chapter-story,
+.chapter-question {
   grid-column: 2 / 10;
   font-size: 25px;
   color: #402218;
@@ -193,7 +194,7 @@ img {
   height: 80px;
   cursor: pointer;
   filter: brightness(0) invert(1) drop-shadow(0 0 0.75rem #402218);
-}    
+}
 
 .hide {
   display: none;
@@ -201,9 +202,52 @@ img {
 
 .absolute {
   position: absolute;
-  margin: 0; 
+  margin: 0;
 }
 
 .drop-effect {
   background: rgba(58, 226, 36, 0.2);
+}
+
+.message-container {
+  position: absolute;
+  top: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: #c68b59;
+  border: 1px solid #f4d9a8;
+  border-radius: 5px;
+  width: 400px;
+  padding: 80px;
+  box-shadow: 0 5px 15px #f2e2c8;
+  font-size: 20px;
+}
+
+.message-container button {
+  cursor: pointer;
+  margin-top: 40px;
+  font-size: 20px;
+  background-color: #c68b59;
+  border: none;
+  border-bottom: 3px solid #402218;
+  padding-bottom: 8px;
+}
+
+.message-container button::after {
+  content: "";
+  position: absolute;
+  border-right: 3px solid #402218;
+  border-top: 3px solid #402218;
+  height: 8px;
+  width: 8px;
+  transform: rotate(45deg);
+  margin-top: 31.5px;
+}
+
+.message-container button:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
 }
