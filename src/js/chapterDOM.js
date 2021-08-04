@@ -3,11 +3,10 @@ import homeImage from "../images/styling/home.png"
 import arrow from "../images/styling/arrow-right.png"
 
 const createChapterStructure = (chapterObj, callback) => {
-  let dragContainer; 
 
   const hideStoryContent = () => {
     const story = document.querySelector("p");
-    const images = dragContainer.querySelectorAll(".picture")
+    const images = container.querySelectorAll(".picture")
     const nextButton = document.querySelector(".next");
     const question = document.querySelector(".chapter-question");
 
@@ -39,7 +38,7 @@ const createChapterStructure = (chapterObj, callback) => {
   };
 
   const setupImages = () => {
-    dragContainer = document.createElement("div");
+    const container = document.createElement("div");
     const images = chapterObj.getImages();
 
     for (let image of images) {
@@ -55,19 +54,19 @@ const createChapterStructure = (chapterObj, callback) => {
       pictureContainer.append(picture);
 
       if (picture.className !== "drop-container") {
-        makeDraggable(pictureContainer, dragContainer);
+        makeDraggable(pictureContainer, container);
       }
       
-      dragContainer.append(pictureContainer);
+      container.append(pictureContainer);
     }
 
     makeDroppable(
-      dragContainer.querySelector(".right"),
-      dragContainer.querySelector(".drop-container"),
+      container.querySelector(".right"),
+      container.querySelector(".drop-container"),
       () => callback(chapterObj)
     );
 
-    return dragContainer;
+    return container;
   };
 
   const setupChapterPage = () => {
@@ -91,19 +90,23 @@ const createChapterStructure = (chapterObj, callback) => {
       question.classList.add("hide");
       question.textContent = chapterObj.getQuestion();
       
-      const dragContainer = setupImages();
-      dragContainer.id = "drag-container";
-      dragContainer.append(homeButton, nextChapterButton, title, story, question);
+      const container = setupImages();
+      container.id = "container";
+      container.append(homeButton, nextChapterButton, title, story, question);
 
-      const images = dragContainer.querySelectorAll(".picture")
+      const images = container.querySelectorAll(".picture")
       images.forEach(img => img.classList.add("hide"))
 
-      section.append(dragContainer);
+      section.append(container);
     } else {
       //chapter is text only.
-      
       const { homeButton, nextChapterButton } = createButtons(false);
-      section.append(homeButton, nextChapterButton, story);
+
+      const textContainer = document.createElement("div")
+      textContainer.id = "container";
+      textContainer.append(homeButton, nextChapterButton, story)
+
+      section.append(textContainer);
     }
 
     return section;
