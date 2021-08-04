@@ -1,4 +1,4 @@
-const Chapter = (story, images, question, chapterNumber) => {
+const Chapter = (story, chapterNumber, images=null, question=null) => {
   let completed = false;
 
   const setCompletionStatus = () => (completed = !completed);
@@ -16,6 +16,7 @@ const Chapter = (story, images, question, chapterNumber) => {
     getQuestion,
     getChapterNumber,
   };
-};
+}
+
 
 export { Chapter };
