@@ -1,6 +1,5 @@
 import { render } from "./render";
 import { createChapterStructure } from "./chapterDOM";
-import { createChapterEnd } from "./chapterEnd";
 import { createStoryEnd } from "./storyEnd";
 import { quizComponent } from "./quiz-component";
 import { message } from "./success-message";
@@ -26,24 +25,34 @@ const gameLogic = (story) => {
     let answerValue = checkedInput.dataset.answer;
 
     if (rightAnswer === answerValue) {
-      quiz.setPassed();
-      const getQuiz = story.getFinalQuizzes();
-
-      if (!getQuiz) {
-        story.setCompletionStatus();
-        render(storyEnd);
-      } else {
-        startStoryQuiz();
-      }
+      questionCompleted(storyEnd);
     } else {
-      if (answerCounter < 2) {
-        answerCounter++;
-        alert("Wrong answer, try again");
-      } else {
-        alert(`Right answer was ${rightAnswer}`);
-        answerCounter = 0;
-        render(storyEnd);
-      }
+      handleWrongAnswer(rightAnswer, storyEnd);
+    }
+  };
+
+  const questionCompleted = (end) => {
+    const getQuiz = story.getFinalQuizzes();
+    getQuiz.setPassed();
+
+    const isAllPassed = story.allPassed();
+
+    if (isAllPassed) {
+      story.setCompletionStatus();
+      render(end);
+    } else {
+      startStoryQuiz(getQuiz);
+    }
+  };
+
+  const handleWrongAnswer = (answer, end) => {
+    if (answerCounter < 2) {
+      answerCounter++;
+      alert("Wrong answer, try again");
+    } else {
+      alert(`Right answer was ${answer}`);
+      answerCounter = 0;
+      questionCompleted(end);
     }
   };
 
