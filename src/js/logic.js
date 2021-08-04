@@ -66,8 +66,6 @@ const gameLogic = (story) => {
 
   const goToNextChapter = () => {
     story.getCurrentChapter().setCompletionStatus();
-    //player.setScore = player.getScore() + 1;
-
     const nextChapter = story.findNextChapter();
 
     if (nextChapter) {
@@ -77,7 +75,7 @@ const gameLogic = (story) => {
     }
   };
 
-  return { startFirstChapter };
+  return { startFirstChapter, displayChapterEnd };
 };
 
 export { gameLogic };

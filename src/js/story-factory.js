@@ -38,11 +38,13 @@ const Story = (title, quizzes) => {
   };
 
   const getTitle = () => title;
+  const getChapters = () => chapters;
   const setCompletionStatus = () => (completed = !completed);
   const getCompletionStatus = () => completed;
 
   return {
     addChapters,
+    getChapters,
     findNextChapter,
     getTitle,
     setCompletionStatus,

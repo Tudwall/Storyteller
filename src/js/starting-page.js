@@ -1,4 +1,4 @@
-const startingPage = (renderFunction, HtPRenderFunction) => {
+const startingPage = (renderFunction, HtPRenderFunction, renderChapterIndexFn) => {
   const title = document.createElement("h1");
   title.id = "title";
   title.textContent = "Storyteller";
@@ -23,10 +23,17 @@ const startingPage = (renderFunction, HtPRenderFunction) => {
   const mainMenu = document.createElement("div");
   mainMenu.id = "main-menu";
 
+  const chaptersButton = document.createElement("button");
+  chaptersButton.textContent = "Chapters";
+  chaptersButton.id = "chaptersIndex-button"
+  chaptersButton.classList.add("home-button");
+  chaptersButton.addEventListener("click", renderChapterIndexFn);
+
   mainMenu.appendChild(title);
   mainMenu.appendChild(desc);
   mainMenu.appendChild(startGameBtn);
   mainMenu.appendChild(HtPBtn);
+  mainMenu.appendChild(chaptersButton);
 
   return mainMenu;
 };

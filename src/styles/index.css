@@ -79,6 +79,11 @@ h6 {
   grid-row: 7 / 8;
 }
 
+#chaptersIndex-button {
+
+  grid-row: 8 / 9;
+}
+
 section {
   background: url(../images/styling/parchment.png);
   background-size: 100% 100%;
@@ -206,4 +211,62 @@ img {
 
 .drop-effect {
   background: rgba(58, 226, 36, 0.2);
+}
+
+
+/* CHAPTERS INDEX  */
+
+#chapter-index {
+  padding: 40px 0;
+  /* border: 1px red solid; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#chapter-index h1 {
+  font-size: 40px;
+  color: white;
+  text-align: center;
+}
+
+#chapter-index #home-button {
+  font-size: 18px;
+  border-radius: 10px;
+  border: 3px rgb(184, 156, 104) solid;
+  margin: 2rem 0;
+}
+
+#chapters-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 75%;
+}
+
+#chapters-container .chapter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 200px;
+  min-width: 200px;
+  border: 4px white solid;
+  border-radius: 10px;
+  background-color: rgb(228, 199, 146);
+  text-align: center;
+  
+}
+
+#chapters-container {
+  font-size: 20px;
+}
+
+#chapters-container button {
+  font-size: 18px;
+  background-color: rgb(133, 190, 87);
+  margin: 15px 0;
+  border-radius: 5px;
+  color: white;
 }

@@ -1,18 +1,25 @@
 import { render } from "./render.js"
-import { startingPage } from "./starting-page";
+import { startPage } from "./index";
 import { createChapterStructure } from "./chapterDOM.js";
 
-const chapterIndex = (story) => {
+//either this or create new logic object in here. 
+
+const chapterIndex = (story, storyLogic) => {
     let currentChapterNumber = 1;
 
     const base = document.createElement("div");
+    base.id = "chapter-index";
+
     const text = document.createElement("h1");
     text.textContent = "Chapters";
 
     const home_button = document.createElement("button");
+    home_button.textContent = "Back to Home";
+    home_button.id = "home-button";
     home_button.addEventListener("click", () => {
-        render(startingPage);
+        render(startPage);
     })
+
 
     const chaptersContainer = document.createElement("div");
     chaptersContainer.id = "chapters-container";
@@ -21,8 +28,8 @@ const chapterIndex = (story) => {
     (or while loop breaks if it cannot find chapter with currentChapterNumber)
     */
 
-    while (story.chapters.length !== currentChapterNumber-1) {
-        let chapter = story.chapters.find(chapter => chapter.getChapterNumber() == currentChapterNumber);
+    while (story.getChapters().length !== currentChapterNumber-1) {
+        let chapter = story.getChapters().find(chapter => chapter.getChapterNumber() == currentChapterNumber);
 
         if (chapter == undefined) {
             //there is a chapter missing. 
@@ -37,9 +44,7 @@ const chapterIndex = (story) => {
             const button = document.createElement("button");
             button.textContent = "Play";
             button.addEventListener("click", () => {
-
-                //what should callback be?
-                render(createChapterStructure(chapter, null));
+                render(createChapterStructure(chapter, () => storyLogic.displayChapterEnd(chapter)));
             });
             
             chapterNode.appendChild(text);
@@ -59,4 +64,4 @@ const chapterIndex = (story) => {
 };
 
 
-export default chapterIndex;
+export { chapterIndex };
