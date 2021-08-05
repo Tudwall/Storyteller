@@ -56,7 +56,7 @@ const quizComponent = (quizInfo, callback) => {
     answer.dataset.answer = choice;
 
     const label = document.createElement("label");
-    label.setAttribute("for", `${choice}`);
+    label.setAttribute("for", `choice-${i}`);
     label.textContent = choice;
 
     form.appendChild(answer);
