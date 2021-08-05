@@ -272,6 +272,7 @@ img {
   border-radius: 25%;
   border: 0.1em solid #402218;
   transform: translateY(-0.05em);
+  margin-right: 5px;
 }
 
 .radio__label {
@@ -284,7 +285,6 @@ img {
   font-size: 20px;
   background-color: #c68b59;
   border: none;
-  border-bottom: 3px solid #402218;
   padding-bottom: 8px;
   transition: all 0.5s ease-in-out;
 }
