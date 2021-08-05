@@ -118,11 +118,12 @@ const makeDroppable = (draggable, container, doOndrop) => {
 
   const dropDraggable = () => {
     if (insideContainer) {
-      // Put draggable inside container
+      // Put draggable inside containe
+      draggable.classList.add("smooth-drop")
       draggable.style.left = leftCon + "px";
       draggable.style.top = topCon + "px";
 
-      doOndrop();
+      draggable.addEventListener("transitionend", () => doOndrop())
 
       document.removeEventListener("mouseup", dropDraggable);
     }
