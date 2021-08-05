@@ -1,7 +1,7 @@
 const Chapter = (story, chapterNumber, images=null, question=null) => {
   let completed = false;
 
-  const setCompletionStatus = () => (completed = !completed);
+  const setCompletionStatus = () => (completed = true);
   const getCompletionStatus = () => completed;
   const getStory = () => story;
   const getImages = () => images;

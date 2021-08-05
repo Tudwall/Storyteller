@@ -8,7 +8,7 @@ const gameLogic = (story) => {
   let answerCounter = 0;
 
   const startFirstChapter = () => {
-    const firstChapter = story.getCurrentChapter();
+    const firstChapter = story.getChapter(1);
     return createChapterStructure(firstChapter, displayChapterEnd);
   };
 
@@ -56,17 +56,20 @@ const gameLogic = (story) => {
   //For now this is our callback for drag and drop
   const displayChapterEnd = (chapter) => {
     const chapterNumber = chapter.getChapterNumber();
-    const nextChapter = goToNextChapter();
+
+    const nextChapter = goToNextChapter(chapterNumber);
 
     if (nextChapter !== undefined) {
       const chapterEnd = createChapterEnd(chapterNumber, nextChapter);
       render(chapterEnd);
     }
   };
+  
+  const goToNextChapter = (currentChapterNum) => {
+    
+    story.getChapter(currentChapterNum).setCompletionStatus();
 
-  const goToNextChapter = () => {
-    story.getCurrentChapter().setCompletionStatus();
-    const nextChapter = story.findNextChapter();
+    const nextChapter = story.findNextChapter(currentChapterNum);
 
     if (nextChapter) {
       return createChapterStructure(nextChapter, displayChapterEnd);

@@ -2,11 +2,10 @@ import { render } from "./render.js"
 import { startPage } from "./index";
 import { createChapterStructure } from "./chapterDOM.js";
 
-//either this or create new logic object in here. 
-
 const chapterIndex = (story, storyLogic) => {
     let currentChapterNumber = 1;
-
+    let latestChapterNumber = findLatestCompletedChapter();
+    
     const base = document.createElement("div");
     base.id = "chapter-index";
 
@@ -20,13 +19,41 @@ const chapterIndex = (story, storyLogic) => {
         render(startPage);
     })
 
-
     const chaptersContainer = document.createElement("div");
     chaptersContainer.id = "chapters-container";
 
+    function findLatestCompletedChapter() {
+
+        let completedChapterExist = story.getChapters().some(chapter => {
+            return chapter.getCompletionStatus() == true;
+        });
+
+        //no chapter completed, start at 0 (only chapter 1 unlocked)
+        if (!completedChapterExist) {
+            return 0;
+        } else {
+
+            let allChapters = story.getChapters();
+            let highestChapterNum = 1;
+
+            //check all chapters in story, keep track of the highest completed chapter. 
+            for (let i=0; i < allChapters.length; i++) {
+
+                if (allChapters[i].getCompletionStatus() == true) {
+                    if (allChapters[i].getChapterNumber() > highestChapterNum) {
+                        //new highest completed chapter number found.
+                        highestChapterNum = allChapters[i].getChapterNumber();
+                    }
+                }
+            }
+            return highestChapterNum;
+        }
+    }
+
+
     /*Makes sure chapterNodes are appended in order, based on chapterNumber. Starts at 1, ends at last chapter 
     (or while loop breaks if it cannot find chapter with currentChapterNumber)
-    */
+    */    
 
     while (story.getChapters().length !== currentChapterNumber-1) {
         let chapter = story.getChapters().find(chapter => chapter.getChapterNumber() == currentChapterNumber);
@@ -35,6 +62,7 @@ const chapterIndex = (story, storyLogic) => {
             //there is a chapter missing. 
             break;
         } else {
+
             const chapterNode = document.createElement("div");
             chapterNode.className = "chapter";
 
@@ -43,10 +71,20 @@ const chapterIndex = (story, storyLogic) => {
 
             const button = document.createElement("button");
             button.textContent = "Play";
+            button.classList.add("play-chapter-button");
             button.addEventListener("click", () => {
                 render(createChapterStructure(chapter, () => storyLogic.displayChapterEnd(chapter)));
             });
-            
+
+            // ONLY unlock "play" button for chapters up to latestChapterNumber (which is the last completed chapter) + 1";
+            if (currentChapterNumber <= latestChapterNumber + 1) {
+                //button enabled by default. 
+            } else {
+                button.disabled = true;
+                button.textContent = "Locked";
+                button.classList.add("disabled-button");
+            }
+        
             chapterNode.appendChild(text);
             chapterNode.appendChild(button);
 
@@ -55,6 +93,8 @@ const chapterIndex = (story, storyLogic) => {
             currentChapterNumber++;
         }
     }
+
+    console.log(latestChapterNumber);
 
     base.appendChild(text);
     base.appendChild(home_button);

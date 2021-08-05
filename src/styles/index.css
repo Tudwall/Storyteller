@@ -270,3 +270,7 @@ img {
   border-radius: 5px;
   color: white;
 }
+
+#chapters-container .disabled-button {
+  background-color: rgb(69, 95, 47);
+}
