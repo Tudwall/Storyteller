@@ -4,14 +4,14 @@ import arrow from "../images/styling/arrow-right.png";
 
 const createChapterStructure = (chapterObj, callback) => {
   const hideStoryContent = () => {
-    const story = document.querySelector("p");
+    const story = document.querySelector(".chapter-story");
     const images = container.querySelectorAll(".picture");
-    const nextButton = document.querySelector(".next");
+    const nextContainer = document.querySelector(".next-container");
     const question = document.querySelector(".chapter-question");
 
     story.classList.toggle("hide");
     images.forEach((img) => img.classList.toggle("hide"));
-    nextButton.classList.toggle("hide");
+    nextContainer.classList.toggle("hide");
     question.classList.toggle("hide");
   };
 
@@ -113,11 +113,11 @@ const createChapterStructure = (chapterObj, callback) => {
       section.append(container);
     } else {
       //chapter is text only.
-      const { homeButton, nextChapterButton } = createButtons(false);
+      const { homeButton, nextChapterContainer } = createButtons(false);
 
       const textContainer = document.createElement("div");
       textContainer.id = "container";
-      textContainer.append(homeButton, nextChapterButton, story);
+      textContainer.append(homeButton, nextChapterContainer, story);
 
       section.append(textContainer);
     }
