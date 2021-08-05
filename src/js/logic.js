@@ -1,8 +1,9 @@
 import { render } from "./render";
 import { createChapterStructure } from "./chapterDOM";
-import { createChapterEnd } from "./chapterEnd";
 import { createStoryEnd } from "./storyEnd";
 import { quizComponent } from "./quiz-component";
+import { kiteStory } from "./stories/kite-story";
+import { startingPage } from "./starting-page";
 import { message } from "./success-message";
 
 const gameLogic = (story) => {
@@ -10,12 +11,14 @@ const gameLogic = (story) => {
 
   const startFirstChapter = () => {
     const firstChapter = story.getChapter(1);
-    return createChapterStructure(firstChapter, () => displayMessage(firstChapter));
+    return createChapterStructure(firstChapter, displayHome, () =>
+      displayMessage(firstChapter)
+    );
   };
 
   const endStory = () => {
     const storyTitle = story.getTitle();
-    return createStoryEnd(storyTitle);
+    return createStoryEnd(storyTitle, displayHome);
   };
 
   const checkQuizAnswer = (quiz) => {
@@ -54,10 +57,8 @@ const gameLogic = (story) => {
     render(displayQuiz);
   };
 
-
   //Callback for createChapterStructure which is passed to drag and drop
   const displayMessage = (chapter) => {
-  
     const chapterNumber = chapter.getChapterNumber();
     const generateNextChapter = goToNextChapter(chapterNumber);
     const messageText =
@@ -71,17 +72,26 @@ const gameLogic = (story) => {
       render(setMessage, false);
     }
   };
-  
+
   const goToNextChapter = (currentChapterNum) => {
     story.getChapter(currentChapterNum).setCompletionStatus();
 
     const nextChapter = story.findNextChapter(currentChapterNum);
 
     if (nextChapter) {
-      return createChapterStructure(nextChapter, () => displayMessage(nextChapter));
+      return createChapterStructure(nextChapter, displayHome, () =>
+        displayMessage(nextChapter)
+      );
     } else {
       return startStoryQuiz();
     }
+  };
+
+  const displayHome = () => {
+    const storyLogic = gameLogic(kiteStory);
+    const storyStart = storyLogic.startFirstChapter();
+    const startPage = startingPage(() => render(storyStart));
+    render(startPage);
   };
 
   return { startFirstChapter, displayMessage };
