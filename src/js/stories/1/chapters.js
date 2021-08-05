@@ -3,7 +3,7 @@ const chp_1 = `It was the most tiresome kite in the world, always wagging its ta
 
 const chp_2 = `I have often sat and thought about that kite, and wondered who its father and mother were. Perhaps they were very poor people, just made of newspaper and little bits of common string knotted together, obliged to fly day and night for a living, and never able to give any time to their children or to bring them up properly. `;
 
-const chp_3 = `It was pretty, for it had a snow-white face, and a delicate tail with bows; and, with these, no one, let alone a kite, could help being pretty.`;
+const chp_3 = `It was pretty, for it had a rainbow face, and a delicate tail with three bows; and, with these, no one, let alone a kite, could help being pretty.`;
 
 const chp_4 = `
 But though the kite was pretty, it was not good, and it did not prosper; it came to a bad end, oh! a terrible end

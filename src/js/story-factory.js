@@ -12,23 +12,20 @@ const Story = (title, quizzes) => {
     });
   };
 
-  const getCurrentChapter = () => {
-    const currentChapter = chapters.find((currentChapter) => {
-      return currentChapter.getCompletionStatus() === false;
-    });
+  const getChapter = (number) => {
+    const foundChapter = chapters.find((chapter) => {
+      return chapter.getChapterNumber() == number;
+    })
+    return foundChapter;
+  }
 
-    return currentChapter;
-  };
-
-  const findNextChapter = () => {
-    const nextChapter = getCurrentChapter();
+  const findNextChapter = (number) => {
+    const nextChapter = getChapter(number+1);
 
     if (nextChapter) {
-      const nextChapterNumber = nextChapter.getChapterNumber();
-      return chapters.find(
-        (chapter) => chapter.getChapterNumber() === nextChapterNumber
-      );
+      return nextChapter;
     }
+    return null;
   };
 
   const getFinalQuizzes = () => {
@@ -38,17 +35,19 @@ const Story = (title, quizzes) => {
   };
 
   const getTitle = () => title;
+  const getChapters = () => chapters;
   const setCompletionStatus = () => (completed = !completed);
   const getCompletionStatus = () => completed;
 
   return {
     addChapters,
+    getChapters,
     findNextChapter,
     getTitle,
     setCompletionStatus,
     getCompletionStatus,
     getFinalQuizzes,
-    getCurrentChapter,
+    getChapter,
   };
 };
 

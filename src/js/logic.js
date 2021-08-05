@@ -5,13 +5,14 @@ import { createStoryEnd } from "./storyEnd";
 import { quizComponent } from "./quiz-component";
 import { kiteStory } from "./stories/kite-story";
 import { startingPage } from "./starting-page";
+import { message } from "./success-message";
 
 const gameLogic = (story) => {
   let answerCounter = 0;
 
   const startFirstChapter = () => {
-    const firstChapter = story.getCurrentChapter();
-    return createChapterStructure(firstChapter, displayChapterEnd, displayHome);
+    const firstChapter = story.getChapter(1);
+    return createChapterStructure(firstChapter, () => displayMessage(firstChapter), displayHome);
   };
 
   const endStory = () => {
@@ -55,38 +56,34 @@ const gameLogic = (story) => {
     render(displayQuiz);
   };
 
-  //For now this is our callback for drag and drop
-  const displayChapterEnd = (chapter) => {
+  //Callback for createChapterStructure which is passed to drag and drop
+  const displayMessage = (chapter) => {
+  
     const chapterNumber = chapter.getChapterNumber();
-    const nextChapter = goToNextChapter();
+    const generateNextChapter = goToNextChapter(chapterNumber);
+    const messageText =
+      "Congratulations! You finished this part of the story and now you can go to the next by clicking button below!";
 
-    if (nextChapter !== undefined) {
-      const chapterEnd = createChapterEnd(
-        chapterNumber,
-        nextChapter,
-        displayHome
+    if (generateNextChapter) {
+      const setMessage = message(
+        () => render(generateNextChapter),
+        messageText
       );
-      render(chapterEnd);
     }
   };
+  
+  const goToNextChapter = (currentChapterNum) => {
+    story.getChapter(currentChapterNum).setCompletionStatus();
 
-  const goToNextChapter = () => {
-    story.getCurrentChapter().setCompletionStatus();
-    //player.setScore = player.getScore() + 1;
-
-    const nextChapter = story.findNextChapter();
+    const nextChapter = story.findNextChapter(currentChapterNum);
 
     if (nextChapter) {
-      return createChapterStructure(
-        nextChapter,
-        displayChapterEnd,
-        displayHome
-      );
+      return createChapterStructure(nextChapter, () => displayMessage(nextChapter), displayHome);
     } else {
       return startStoryQuiz();
     }
   };
-
+  
   const displayHome = () => {
     const storyLogic = gameLogic(kiteStory);
     const storyStart = storyLogic.startFirstChapter();
@@ -94,7 +91,7 @@ const gameLogic = (story) => {
     render(startPage);
   };
 
-  return { startFirstChapter };
+  return { startFirstChapter, displayMessage };
 };
 
 export { gameLogic };

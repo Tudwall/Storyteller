@@ -1,14 +1,17 @@
 // -------------------------- dragging --------------------------
 
 const makeDraggable = (element, boundary) => {
-  element.classList.add("draggable");
-
   const startDrag = (event) => {
     event.preventDefault();
     /*  shiftX and shiftY needed so that mouse stays exactly
         on position where element was clicked at on dragStart */
     const shiftX = event.pageX - element.getBoundingClientRect().left;
     const shiftY = event.pageY - element.getBoundingClientRect().top;
+
+    // Lines needed because position change from grid-item to absolute
+    element.style.left = `${event.pageX - shiftX}px`;
+    element.style.top = `${event.pageY - shiftY}px`;
+    element.classList.add("absolute");
 
     // Data below needed for boundary restrictions
     const heightEl = element.getBoundingClientRect().height;
@@ -115,11 +118,12 @@ const makeDroppable = (draggable, container, doOndrop) => {
 
   const dropDraggable = () => {
     if (insideContainer) {
-      // Put draggable inside container
+      // Put draggable inside containe
+      draggable.classList.add("smooth-drop")
       draggable.style.left = leftCon + "px";
       draggable.style.top = topCon + "px";
 
-      doOndrop();
+      draggable.addEventListener("transitionend", () => doOndrop())
 
       document.removeEventListener("mouseup", dropDraggable);
     }

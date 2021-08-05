@@ -6,7 +6,7 @@ import newspaper from "../../../images/dnd/1.2/newspaper.svg";
 import paper from "../../../images/dnd/1.2/paper.svg";
 import fabric from "../../../images/dnd/1.2/fabric.svg";
 import book from "../../../images/dnd/1.2/book.svg";
-import kiteWhite from "../../../images/dnd/1.3/kite-white.svg";
+import kitePink from "../../../images/dnd/1.3/kite-pink.svg";
 import kiteRainbow from "../../../images/dnd/1.3/kite-rainbow.svg";
 import kiteOrange from "../../../images/dnd/1.3/kite-orange.svg";
 import kiteBlue from "../../../images/dnd/1.3/kite-blue.svg";
@@ -29,34 +29,34 @@ const chapterOneImages = [
 
 const chapterTwoImages = [
   { cssClass: "drop-container", url: newspaper },
-  { cssClass: "right", url: newspaper },
-  { cssClass: "wrong", url: paper },
-  { cssClass: "wrong", url: fabric },
-  { cssClass: "wrong", url: book },
+  { cssClass: "right drag-item-1", url: newspaper },
+  { cssClass: "wrong drag-item-2", url: paper },
+  { cssClass: "wrong drag-item-3", url: fabric },
+  { cssClass: "wrong drag-item-4", url: book },
 ];
 
 const chapterThreeImages = [
-  { cssClass: "drop-container", url: kiteWhite },
-  { cssClass: "right", url: kiteWhite },
-  { cssClass: "wrong", url: kiteRainbow },
-  { cssClass: "wrong", url: kiteOrange },
-  { cssClass: "wrong", url: kiteBlue },
+  { cssClass: "drop-container", url: kiteRainbow },
+  { cssClass: "right drag-item-1", url: kiteRainbow },
+  { cssClass: "wrong drag-item-2", url: kitePink },
+  { cssClass: "wrong drag-item-3", url: kiteOrange },
+  { cssClass: "wrong drag-item-4", url: kiteBlue },
 ];
 
 const chapterFourImages = [
   { cssClass: "drop-container", url: houseRed },
-  { cssClass: "right", url: houseRed },
-  { cssClass: "wrong", url: buildingPink },
-  { cssClass: "wrong", url: hospital },
-  { cssClass: "wrong", url: houseBlue },
+  { cssClass: "right drag-item-1", url: houseRed },
+  { cssClass: "wrong drag-item-2", url: buildingPink },
+  { cssClass: "wrong drag-item-3", url: hospital },
+  { cssClass: "wrong drag-item-4", url: houseBlue },
 ];
 
 const chapterFiveImages = [
   { cssClass: "drop-container", url: ladder },
-  { cssClass: "right", url: ladder },
-  { cssClass: "wrong", url: hammer },
-  { cssClass: "wrong", url: rope },
-  { cssClass: "wrong", url: stairs },
+  { cssClass: "right drag-item-1", url: ladder },
+  { cssClass: "wrong drag-item-2", url: hammer },
+  { cssClass: "wrong drag-item-3", url: rope },
+  { cssClass: "wrong drag-item-4", url: stairs },
 ];
 
 export {
