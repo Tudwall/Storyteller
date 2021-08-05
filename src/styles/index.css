@@ -204,6 +204,7 @@ img {
 }
 
 .container-text {
+  color: #402218;
   cursor: pointer;
   position: absolute;
   top: 30px;
