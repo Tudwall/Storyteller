@@ -2,7 +2,7 @@
 
 //should implement a quiz in the future.
 
-function createStoryEnd(storyTitle, quiz, displayHome) {
+function createStoryEnd(storyTitle, displayHome) {
   const base = document.createElement("div");
   base.id = "story-end";
 
