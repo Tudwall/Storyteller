@@ -68,6 +68,7 @@ const createChapterStructure = (chapterObj, displayHome, callback) => {
     makeDroppable(
       container.querySelector(".right"),
       container.querySelector(".drop-container"),
+      container,
       () => callback(chapterObj)
     );
 
