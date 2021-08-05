@@ -246,6 +246,53 @@ img {
   margin-top: 40px;
 }
 
+.quiz-answer-label {
+  display: flex;
+  cursor: pointer;
+}
+
+.radio__input {
+  display: flex;
+}
+
+.radio__input > input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio__input > input:checked + .radio__control {
+  background: #402218;
+}
+
+.radio__control {
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 25%;
+  border: 0.1em solid #402218;
+  transform: translateY(-0.05em);
+}
+
+.radio__label {
+  line-height: 1;
+}
+
+#quiz-submit-btn {
+  cursor: pointer;
+  margin-top: 40px;
+  font-size: 20px;
+  background-color: #c68b59;
+  border: none;
+  border-bottom: 3px solid #402218;
+  padding-bottom: 8px;
+  transition: all 0.5s ease-in-out;
+}
+
+#quiz-submit-btn:hover {
+  transform: scale(1.1);
+}
+
 /* #quiz-container {
   display: grid;
   grid-template-rows: repeat(10, 71.2px);

@@ -60,10 +60,22 @@ const quizComponent = (quizInfo, callback) => {
 
     const label = document.createElement("label");
     label.classList.add("quiz-answer-label");
-    label.setAttribute("for", `${choice}`);
-    label.textContent = choice;
+    label.setAttribute("for", `choice-${i}`);
 
-    form.appendChild(answer);
+    const radioControl = document.createElement("span");
+    radioControl.classList.add("radio__control");
+
+    const radioInput = document.createElement("span");
+    radioInput.classList.add("radio__input");
+
+    const radioLabel = document.createElement("span");
+    radioLabel.classList.add("radio__label");
+    radioLabel.textContent = choice;
+
+    radioInput.appendChild(answer);
+    radioInput.appendChild(radioControl);
+    label.appendChild(radioInput);
+    label.appendChild(radioLabel);
     form.appendChild(label);
   });
 
