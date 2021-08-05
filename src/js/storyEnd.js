@@ -4,14 +4,18 @@
 
 function createStoryEnd(storyTitle, quiz, homePage) {
   const base = document.createElement("div");
+  base.id = "story-end"
 
   const title = document.createElement("h1");
+  title.id = "title"
   title.textContent = `${storyTitle}`;
 
   const description = document.createElement("p");
+  description.id = "story-end-text"
   description.textContent = "Congratulations! You have completed the story.";
 
   const homeButton = document.createElement("button");
+  homeButton.classList.add("back-home-button")
   homeButton.textContent = `Back To Home`;
   homeButton.addEventListener("click", () => {
     //renderContent(homePage)
