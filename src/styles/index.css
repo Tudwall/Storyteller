@@ -29,7 +29,8 @@ h6 {
   font-size: 200%;
 }
 
-#main-menu {
+#main-menu,
+#story-end {
   display: grid;
   grid-template-rows: repeat(10, 71.2px);
   grid-template-columns: repeat(10, 80px);
@@ -48,7 +49,8 @@ h6 {
   margin-top: 40px;
 }
 
-#description {
+#description,
+#story-end-text {
   grid-row: 4 / 5;
   grid-column: 2 / 10;
   align-self: center;
@@ -56,9 +58,12 @@ h6 {
   font-size: 30px;
   color: #402218;
   text-shadow: 2px 2px rgba(255, 255, 255, 0.541);
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-.home-button {
+.home-button,
+.back-home-button {
   grid-column: 4 / 8;
   font-size: 25px;
   color: #402218;
@@ -71,11 +76,17 @@ h6 {
   box-shadow: 3px 3px #00000054;
 }
 
-#start-game-button {
+#start-game-button,
+.back-home-button {
   grid-row: 6 / 7;
 }
 
-#how-to-play-button {
+/* #how-to-play-button {
+  grid-row: 7 / 8;
+} */
+
+#chaptersIndex-button {
+
   grid-row: 7 / 8;
 }
 
@@ -89,7 +100,8 @@ section {
 }
 
 #drag-container,
-#quiz-container {
+#quiz-container,
+#container {
   display: grid;
   grid-template-rows: repeat(10, 71.2px);
   grid-template-columns: repeat(10, 100px);
@@ -222,7 +234,7 @@ img {
   background: rgba(58, 226, 36, 0.2);
 }
 
-/* Quiz styling */
+/* QUIZ */
 
 #quiz-question {
   grid-column: 1 / 3;
@@ -287,8 +299,117 @@ img {
   border: none;
   padding-bottom: 8px;
   transition: all 0.5s ease-in-out;
+} 
+  
+#quiz-submit-btn:hover {
+  transform: scale(1.1);
 }
 
-#quiz-submit-btn:hover {
+/* CHAPTERS INDEX  */
+
+#chapter-index {
+  padding: 40px 0;
+  /* border: 1px red solid; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#chapter-index h1 {
+  font-size: 40px;
+  color: white;
+  text-align: center;
+}
+
+#chapter-index #home-button {
+  font-size: 18px;
+  border-radius: 10px;
+  border: 3px rgb(184, 156, 104) solid;
+  margin: 2rem 0;
+}
+
+#chapters-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 75%;
+}
+
+#chapters-container .chapter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 200px;
+  min-width: 200px;
+  border: 4px white solid;
+  border-radius: 10px;
+  background-color: rgb(228, 199, 146);
+  text-align: center;
+}
+
+#chapters-container {
+  font-size: 20px;
+}
+
+#chapters-container button {
+  font-size: 18px;
+  background-color: rgb(133, 190, 87);
+  margin: 15px 0;
+  border-radius: 5px;
+  color: white;
+}
+
+#chapters-container .disabled-button {
+  background-color: rgb(69, 95, 47);
+}
+
+.smooth-drop {
+  transition: left 350ms cubic-bezier(0.49, 0.02, 0.46, 1.74), 
+              top 350ms cubic-bezier(0.49, 0.02, 0.46, 1.74);
+}
+
+/* SUCCESS MESSAGE */
+
+.message-container {
+  position: absolute;
+  top: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: #c68b59;
+  border: 1px solid #f4d9a8;
+  border-radius: 5px;
+  width: 400px;
+  padding: 80px;
+  box-shadow: 0 5px 15px #f2e2c8;
+  font-size: 20px;
+}
+
+.message-container button {
+  cursor: pointer;
+  margin-top: 40px;
+  font-size: 20px;
+  background-color: #c68b59;
+  border: none;
+  padding-bottom: 8px;
+}
+
+.message-container button::after {
+  content: "";
+  position: absolute;
+  border-right: 3px solid #402218;
+  border-top: 3px solid #402218;
+  height: 8px;
+  width: 8px;
+  transform: rotate(45deg);
+  margin-top: 31.5px;
+}
+
+.message-container button:hover {
+  transition: 0.5s;
   transform: scale(1.1);
 }
