@@ -10,7 +10,7 @@ const gameLogic = (story) => {
 
   const startFirstChapter = () => {
     const firstChapter = story.getChapter(1);
-    return createChapterStructure(firstChapter, displayMessage(firstChapter);
+    return createChapterStructure(firstChapter, () => displayMessage(firstChapter));
   };
 
   const endStory = () => {
@@ -73,19 +73,18 @@ const gameLogic = (story) => {
   };
   
   const goToNextChapter = (currentChapterNum) => {
-    
     story.getChapter(currentChapterNum).setCompletionStatus();
 
     const nextChapter = story.findNextChapter(currentChapterNum);
 
     if (nextChapter) {
-      return createChapterStructure(nextChapter, displayMessage(nextChapter);
+      return createChapterStructure(nextChapter, () => displayMessage(nextChapter));
     } else {
       return startStoryQuiz();
     }
   };
 
-  return { startFirstChapter, displayChapterEnd };
+  return { startFirstChapter, displayMessage };
 };
 
 export { gameLogic };

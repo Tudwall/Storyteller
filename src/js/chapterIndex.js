@@ -50,7 +50,6 @@ const chapterIndex = (story, storyLogic) => {
         }
     }
 
-
     /*Makes sure chapterNodes are appended in order, based on chapterNumber. Starts at 1, ends at last chapter 
     (or while loop breaks if it cannot find chapter with currentChapterNumber)
     */    
@@ -67,13 +66,13 @@ const chapterIndex = (story, storyLogic) => {
             chapterNode.className = "chapter";
 
             const text = document.createElement("p");
-            text.textContent = `Chapter ${currentChapterNumber}`;
+            text.textContent = `Chapter ${currentChapterNumber} ${chapter.getCompletionStatus()}`;
 
             const button = document.createElement("button");
             button.textContent = "Play";
             button.classList.add("play-chapter-button");
             button.addEventListener("click", () => {
-                render(createChapterStructure(chapter, () => storyLogic.displayChapterEnd(chapter)));
+                render(createChapterStructure(chapter, () => storyLogic.displayMessage(chapter)));
             });
 
             // ONLY unlock "play" button for chapters up to latestChapterNumber (which is the last completed chapter) + 1";
