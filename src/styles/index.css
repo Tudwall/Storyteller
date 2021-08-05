@@ -29,7 +29,8 @@ h6 {
   font-size: 200%;
 }
 
-#main-menu {
+#main-menu,
+#story-end {
   display: grid;
   grid-template-rows: repeat(10, 71.2px);
   grid-template-columns: repeat(10, 80px);
@@ -48,7 +49,8 @@ h6 {
   margin-top: 40px;
 }
 
-#description {
+#description,
+#story-end-text {
   grid-row: 4 / 5;
   grid-column: 2 / 10;
   align-self: center;
@@ -56,9 +58,12 @@ h6 {
   font-size: 30px;
   color: #402218;
   text-shadow: 2px 2px rgba(255, 255, 255, 0.541);
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-.home-button {
+.home-button,
+.back-home-button {
   grid-column: 4 / 8;
   font-size: 25px;
   color: #402218;
@@ -71,7 +76,8 @@ h6 {
   box-shadow: 3px 3px #00000054;
 }
 
-#start-game-button {
+#start-game-button,
+.back-home-button {
   grid-row: 6 / 7;
 }
 
