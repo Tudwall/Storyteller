@@ -1,24 +1,21 @@
 import { makeDraggable, makeDroppable } from "./drag-drop";
-import homeImage from "../images/styling/home.png"
-import arrow from "../images/styling/arrow-right.png"
+import homeImage from "../images/styling/home.png";
+import arrow from "../images/styling/arrow-right.png";
 
 const createChapterStructure = (chapterObj, callback) => {
-
   const hideStoryContent = () => {
     const story = document.querySelector("p");
-    const images = container.querySelectorAll(".picture")
+    const images = container.querySelectorAll(".picture");
     const nextButton = document.querySelector(".next");
     const question = document.querySelector(".chapter-question");
 
-    
     story.classList.toggle("hide");
-    images.forEach(img => img.classList.toggle("hide"))
+    images.forEach((img) => img.classList.toggle("hide"));
     nextButton.classList.toggle("hide");
     question.classList.toggle("hide");
   };
 
   const createButtons = (hasImages) => {
-
     const homeButton = document.createElement("img");
     homeButton.classList.add("home");
     homeButton.src = homeImage;
@@ -28,13 +25,23 @@ const createChapterStructure = (chapterObj, callback) => {
     nextChapterButton.classList.add("next");
     nextChapterButton.src = arrow;
 
+    const containerText = document.createElement("p");
+    containerText.classList.add("container-text");
+    containerText.textContent = "NEXT";
+
+    const nextChapterContainer = document.createElement("div");
+    nextChapterContainer.classList.add("next-container");
+    nextChapterContainer.append(nextChapterButton, containerText);
+
     if (hasImages) {
-      nextChapterButton.addEventListener("click", hideStoryContent);
+      nextChapterContainer.addEventListener("click", hideStoryContent);
     } else {
-      nextChapterButton.addEventListener("click", () => callback(chapterObj));
+      nextChapterContainer.addEventListener("click", () =>
+        callback(chapterObj)
+      );
     }
 
-    return { homeButton, nextChapterButton };
+    return { homeButton, nextChapterContainer };
   };
 
   const setupImages = () => {
@@ -48,7 +55,7 @@ const createChapterStructure = (chapterObj, callback) => {
       picture.src = image.url;
 
       const pictureContainer = document.createElement("div");
-      pictureContainer.classList.add("picture")
+      pictureContainer.classList.add("picture");
       pictureContainer.classList.add(classArr[0]);
       pictureContainer.classList.add(classArr[1]);
       pictureContainer.append(picture);
@@ -56,7 +63,7 @@ const createChapterStructure = (chapterObj, callback) => {
       if (picture.className !== "drop-container") {
         makeDraggable(pictureContainer, container);
       }
-      
+
       container.append(pictureContainer);
     }
 
@@ -75,11 +82,11 @@ const createChapterStructure = (chapterObj, callback) => {
     const story = document.createElement("p");
     story.classList.add("chapter-story");
     story.textContent = chapterObj.getStory();
-  
-    if (chapterObj.getImages() !== null) {
-      //chapter has images and question. 
 
-      const { homeButton, nextChapterButton } = createButtons(true);
+    if (chapterObj.getImages() !== null) {
+      //chapter has images and question.
+
+      const { homeButton, nextChapterContainer } = createButtons(true);
 
       const title = document.createElement("H1");
       title.classList.add("chapter-title");
@@ -89,22 +96,28 @@ const createChapterStructure = (chapterObj, callback) => {
       question.classList.add("chapter-question");
       question.classList.add("hide");
       question.textContent = chapterObj.getQuestion();
-      
+
       const container = setupImages();
       container.id = "container";
-      container.append(homeButton, nextChapterButton, title, story, question);
+      container.append(
+        homeButton,
+        nextChapterContainer,
+        title,
+        story,
+        question
+      );
 
-      const images = container.querySelectorAll(".picture")
-      images.forEach(img => img.classList.add("hide"))
+      const images = container.querySelectorAll(".picture");
+      images.forEach((img) => img.classList.add("hide"));
 
       section.append(container);
     } else {
       //chapter is text only.
       const { homeButton, nextChapterButton } = createButtons(false);
 
-      const textContainer = document.createElement("div")
+      const textContainer = document.createElement("div");
       textContainer.id = "container";
-      textContainer.append(homeButton, nextChapterButton, story)
+      textContainer.append(homeButton, nextChapterButton, story);
 
       section.append(textContainer);
     }
