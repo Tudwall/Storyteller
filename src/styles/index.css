@@ -94,7 +94,7 @@ section {
   padding: 50px 120px;
 }
 
-#drag-container {
+#container {
   display: grid;
   grid-template-rows: repeat(10, 71.2px);
   grid-template-columns: repeat(10, 100px);
@@ -213,4 +213,47 @@ img {
 
 .drop-effect {
   background: rgba(58, 226, 36, 0.2);
+}
+
+.message-container {
+  position: absolute;
+  top: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: #c68b59;
+  border: 1px solid #f4d9a8;
+  border-radius: 5px;
+  width: 400px;
+  padding: 80px;
+  box-shadow: 0 5px 15px #f2e2c8;
+  font-size: 20px;
+}
+
+.message-container button {
+  cursor: pointer;
+  margin-top: 40px;
+  font-size: 20px;
+  background-color: #c68b59;
+  border: none;
+  border-bottom: 3px solid #402218;
+  padding-bottom: 8px;
+}
+
+.message-container button::after {
+  content: "";
+  position: absolute;
+  border-right: 3px solid #402218;
+  border-top: 3px solid #402218;
+  height: 8px;
+  width: 8px;
+  transform: rotate(45deg);
+  margin-top: 31.5px;
+}
+
+.message-container button:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
 }

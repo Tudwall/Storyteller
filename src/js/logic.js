@@ -3,13 +3,14 @@ import { createChapterStructure } from "./chapterDOM";
 import { createChapterEnd } from "./chapterEnd";
 import { createStoryEnd } from "./storyEnd";
 import { quizComponent } from "./quiz-component";
+import { message } from "./success-message";
 
 const gameLogic = (story) => {
   let answerCounter = 0;
 
   const startFirstChapter = () => {
     const firstChapter = story.getCurrentChapter();
-    return createChapterStructure(firstChapter, displayChapterEnd);
+    return createChapterStructure(firstChapter, displayMessage);
   };
 
   const endStory = () => {
@@ -53,14 +54,18 @@ const gameLogic = (story) => {
     render(displayQuiz);
   };
 
-  //For now this is our callback for drag and drop
-  const displayChapterEnd = (chapter) => {
-    const chapterNumber = chapter.getChapterNumber();
-    const nextChapter = goToNextChapter();
+  //Callback for createChapterStructure which is passed to drag and drop
+  const displayMessage = () => {
+    const generateNextChapter = goToNextChapter();
+    const messageText =
+      "Congratulations! You finished this part of the story and now you can go to the next by clicking button below!";
 
-    if (nextChapter !== undefined) {
-      const chapterEnd = createChapterEnd(chapterNumber, nextChapter);
-      render(chapterEnd);
+    if (generateNextChapter) {
+      const setMessage = message(
+        () => render(generateNextChapter),
+        messageText
+      );
+      render(setMessage, false);
     }
   };
 
@@ -71,7 +76,7 @@ const gameLogic = (story) => {
     const nextChapter = story.findNextChapter();
 
     if (nextChapter) {
-      return createChapterStructure(nextChapter, displayChapterEnd);
+      return createChapterStructure(nextChapter, displayMessage);
     } else {
       return startStoryQuiz();
     }
