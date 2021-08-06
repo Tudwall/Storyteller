@@ -1,6 +1,7 @@
 import { render } from "./render.js";
 import { startPage } from "./index";
 import { createChapterStructure } from "./chapterDOM.js";
+import homeImage from "../images/styling/home.png";
 
 const chapterIndex = (story, storyLogic) => {
   let currentChapterNumber = 1;
@@ -12,9 +13,9 @@ const chapterIndex = (story, storyLogic) => {
   const text = document.createElement("h1");
   text.textContent = "Chapters";
 
-  const home_button = document.createElement("button");
-  home_button.textContent = "Back to Home";
-  home_button.id = "home-button";
+  const home_button = document.createElement("img");
+  home_button.src = homeImage;
+  home_button.classList.add("home");
   home_button.addEventListener("click", () => {
     render(startPage);
   });
@@ -48,50 +49,55 @@ const chapterIndex = (story, storyLogic) => {
   }
 
   /*Makes sure chapterNodes are appended in order, based on chapterNumber. Starts at 1, ends at last chapter 
-    (or while loop breaks if it cannot find chapter with currentChapterNumber)    */    
+    (or while loop breaks if it cannot find chapter with currentChapterNumber)    */
 
-    while (story.getChapters().length !== currentChapterNumber-1) {
-        let chapter = story.getChapters().find(chapter => chapter.getChapterNumber() == currentChapterNumber);
+  while (story.getChapters().length !== currentChapterNumber - 1) {
+    let chapter = story
+      .getChapters()
+      .find((chapter) => chapter.getChapterNumber() == currentChapterNumber);
 
-        if (chapter == undefined) {
-            //there is a chapter missing. 
-            break;
-        } else {
+    if (chapter == undefined) {
+      //there is a chapter missing.
+      break;
+    } else {
+      const chapterNode = document.createElement("div");
+      chapterNode.className = "chapter";
 
-            const chapterNode = document.createElement("div");
-            chapterNode.className = "chapter";
+      const text = document.createElement("p");
+      text.textContent = `Chapter ${currentChapterNumber}`;
 
-            const text = document.createElement("p");
-            text.textContent = `Chapter ${currentChapterNumber}`;
+      const button = document.createElement("button");
+      button.textContent = "Play";
+      button.classList.add("play-chapter-button");
+      button.addEventListener("click", () => {
+        render(
+          createChapterStructure(chapter, storyLogic.displayHome, () =>
+            storyLogic.displayMessage(chapter)
+          )
+        );
+      });
 
-            const button = document.createElement("button");
-            button.textContent = "Play";
-            button.classList.add("play-chapter-button");
-            button.addEventListener("click", () => {
-                render(createChapterStructure(chapter, storyLogic.displayHome, () => storyLogic.displayMessage(chapter)));
-            });
+      // ONLY unlock "play" button for chapters up to latestChapterNumber (which is the last completed chapter) + 1";
+      if (currentChapterNumber <= latestChapterNumber + 1) {
+        //button enabled by default.
+      } else {
+        button.disabled = true;
+        button.textContent = "Locked";
+        button.classList.add("disabled-button");
+      }
 
-            // ONLY unlock "play" button for chapters up to latestChapterNumber (which is the last completed chapter) + 1";
-            if (currentChapterNumber <= latestChapterNumber + 1) {
-                //button enabled by default. 
-            } else {
-                button.disabled = true;
-                button.textContent = "Locked";
-                button.classList.add("disabled-button");
-            }
-        
-            chapterNode.appendChild(text);
-            chapterNode.appendChild(button);
+      chapterNode.appendChild(text);
+      chapterNode.appendChild(button);
 
-            chaptersContainer.appendChild(chapterNode);   
+      chaptersContainer.appendChild(chapterNode);
 
-            currentChapterNumber++;
-        }
+      currentChapterNumber++;
     }
+  }
 
-    base.appendChild(text);
-    base.appendChild(home_button);
-    base.appendChild(chaptersContainer);
+  base.appendChild(text);
+  base.appendChild(home_button);
+  base.appendChild(chaptersContainer);
 
   return base;
 };
