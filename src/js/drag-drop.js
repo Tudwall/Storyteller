@@ -5,13 +5,6 @@ const makeDraggable = (element, boundary) => {
     event.preventDefault();
     /*  shiftX and shiftY needed so that mouse stays exactly
         on position where element was clicked at on dragStart */
-    const shiftX = event.pageX - element.getBoundingClientRect().left;
-    const shiftY = event.pageY - element.getBoundingClientRect().top;
-
-    // Lines needed because position change from grid-item to absolute
-    element.style.left = `${event.pageX - shiftX}px`;
-    element.style.top = `${event.pageY - shiftY}px`;
-    element.classList.add("absolute");
 
     // Data below needed for boundary restrictions
     const heightEl = element.getBoundingClientRect().height;
@@ -22,13 +15,21 @@ const makeDraggable = (element, boundary) => {
     const leftBound = boundary.getBoundingClientRect().left;
     const rightBound = boundary.getBoundingClientRect().right;
 
+    const shiftX = event.pageX - element.getBoundingClientRect().left;
+    const shiftY = event.pageY - element.getBoundingClientRect().top;
+
+    // Lines needed because position change from grid-item to absolute
+    element.style.left = `${event.pageX - shiftX -leftBound}px`;
+    element.style.top = `${event.pageY - shiftY - topBound}px`;
+    element.classList.add("absolute");
+
     const startMove = (event) => {
       // Only let Element move left/right if inside boundary
       if (
         event.pageX - shiftX > leftBound &&
         event.pageX - shiftX + widthEl < rightBound
       ) {
-        element.style.left = `${event.pageX - shiftX}px`;
+        element.style.left = `${event.pageX - shiftX - leftBound}px`;
       }
 
       // Only let Element move top/bottom if inside boundary
@@ -36,7 +37,7 @@ const makeDraggable = (element, boundary) => {
         event.pageY - shiftY > topBound &&
         event.pageY - shiftY + heightEl < bottomBound
       ) {
-        element.style.top = `${event.pageY - shiftY}px`;
+        element.style.top = `${event.pageY - shiftY - topBound}px`;
       }
     };
 
@@ -71,27 +72,27 @@ const makeDraggable = (element, boundary) => {
 
 // -------------------------- dropping --------------------------
 
-const makeDroppable = (draggable, container, doOndrop) => {
+const makeDroppable = (draggable, dropTarget, boundary, doOndrop) => {
   let insideContainer = false;
-  let topCon;
-  let bottomCon;
-  let leftCon;
+  let topDrop;
+  let bottomDrop;
+  let leftDrop;
 
   // Function below runs every time draggable moved a bit
   const callback = () => {
-    // Get side positions of container relative to page
-    topCon = container.getBoundingClientRect().top;
-    bottomCon = container.getBoundingClientRect().bottom;
-    leftCon = container.getBoundingClientRect().left;
+    // Get side positions of dropTarget relative to page
+    topDrop = dropTarget.getBoundingClientRect().top;
+    bottomDrop = dropTarget.getBoundingClientRect().bottom;
+    leftDrop = dropTarget.getBoundingClientRect().left;
     // Get side positions of draggable relative to page
     const topEl = draggable.getBoundingClientRect().top;
     const bottomEl = draggable.getBoundingClientRect().bottom;
     const leftEl = draggable.getBoundingClientRect().left;
 
     // Get x and y position from circle center points
-    const radiusCon = (bottomCon - topCon) / 2;
-    const centerYCon = topCon + radiusCon;
-    const centerXCon = leftCon + radiusCon;
+    const radiusCon = (bottomDrop - topDrop) / 2;
+    const centerYCon = topDrop + radiusCon;
+    const centerXCon = leftDrop + radiusCon;
 
     const radiusEl = (bottomEl - topEl) / 2;
     const centerYEl = topEl + radiusEl;
@@ -102,13 +103,13 @@ const makeDroppable = (draggable, container, doOndrop) => {
     const offsetX = Math.abs(centerXCon - centerXEl);
     const distance = Math.sqrt(offsetY ** 2 + offsetX ** 2);
 
-    // Check if a part of draggable is inside container
+    // Check if a part of draggable is inside dropTarget
     if (distance < radiusCon + radiusEl) {
       insideContainer = true;
-      container.classList.add("drop-effect");
+      dropTarget.classList.add("drop-effect");
     } else {
       insideContainer = false;
-      container.classList.remove("drop-effect");
+      dropTarget.classList.remove("drop-effect");
     }
   };
 
@@ -118,11 +119,17 @@ const makeDroppable = (draggable, container, doOndrop) => {
 
   const dropDraggable = () => {
     if (insideContainer) {
-      // Put draggable inside container
-      draggable.style.left = leftCon + "px";
-      draggable.style.top = topCon + "px";
+      draggable.classList.add("smooth-drop")
 
-      doOndrop();
+      // Get left and right border positions of boundary
+      const boundaryLeft = boundary.getBoundingClientRect().left;
+      const boundaryTop = boundary.getBoundingClientRect().top;
+
+      // Put draggable inside dropTarget
+      draggable.style.left = `${leftDrop - boundaryLeft}px`;
+      draggable.style.top = `${topDrop - boundaryTop}px`;
+
+      draggable.addEventListener("transitionend", () => doOndrop())
 
       document.removeEventListener("mouseup", dropDraggable);
     }
@@ -134,24 +141,24 @@ const makeDroppable = (draggable, container, doOndrop) => {
 /* ***************** How to use makeDroppable*****************
 1. Create a draggable element with makeDraggable.
 
-2. Create a container element.
+2. Create a dropTarget element.
 
 3. Create a callback for successful dropping.
 
-4. Pass draggable + container + callback as arguments to makeDroppable.
+4. Pass draggable + dropTarget + callback as arguments to makeDroppable.
 
 5. Create acss class 'drop-effect' -
-   style is applied to container when draggable hovers over it
+   style is applied to dropTarget when draggable hovers over it
 
-6. When draggable is over container and mouse goes up,
-   draggable jumps into container and callback function is executed
+6. When draggable is over dropTarget and mouse goes up,
+   draggable jumps into dropTarget and callback function is executed
 */
 
 /* ***************** Explanation of makeDroppable Code *****************
-1. getBoundingClientRect() returns side positions of draggable/container
+1. getBoundingClientRect() returns side positions of draggable/dropTarget
    (e.g. getBoundingClientRect().left: distance in px from left of page)
 
-2. insideContainer is needed to track if draggable is over container or not
+2. insideContainer is needed to track if draggable is over dropTarget or not
 
 3. Callback passed into Mutationobserver gets executed each
    time a change is made to draggable. With MutationObserver interface

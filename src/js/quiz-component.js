@@ -1,15 +1,15 @@
 //I added second parameter which is callback
 const quizComponent = (quizInfo, callback) => {
   const title = document.createElement("h2");
-  title.id = "title";
+  title.id = "quiz-title";
   title.textContent = "Pop quiz!";
 
   const question = document.createElement("p");
-  question.id = "question";
+  question.id = "quiz-question";
   question.textContent = quizInfo.getQuestion();
 
   const submitBtn = document.createElement("button");
-  submitBtn.id = "submit-btn";
+  submitBtn.id = "quiz-submit-btn";
   submitBtn.textContent = "Submit my answer!";
   submitBtn.setAttribute("type", "button");
 
@@ -19,11 +19,13 @@ const quizComponent = (quizInfo, callback) => {
   });
 
   const quiz = document.createElement("div");
-  quiz.id = "quiz";
+  quiz.id = "quiz-container";
   quiz.appendChild(title);
 
   const form = document.createElement("form");
-  form.id = "answers";
+  form.id = "quiz-form";
+
+  const section = document.createElement("section");
 
   const nextChapterBtn = document.createElement("button");
   nextChapterBtn.id = "next-chapter-btn";
@@ -38,7 +40,7 @@ const quizComponent = (quizInfo, callback) => {
   if (quizInfo.getPassed() === true) {
     nextChapterBtn.classList.toggle("hide");
     const congratulationMsg = document.createElement("p");
-    congratulationMsg.id = "congratulation-msg";
+    congratulationMsg.id = "quiz-congratulation-msg";
     congratulationMsg.textContent = "Congratulations! You passed this quiz!";
   } else {
     nextChapterBtn.classList.toggle("hide");
@@ -49,6 +51,7 @@ const quizComponent = (quizInfo, callback) => {
   const choices = quizInfo.getChoices();
   choices.forEach((choice, i) => {
     const answer = document.createElement("input");
+    answer.classList.add("quiz-answer-input");
     answer.setAttribute("type", "radio");
     answer.id = `choice-${i}`;
     answer.setAttribute("name", "answer");
@@ -56,18 +59,32 @@ const quizComponent = (quizInfo, callback) => {
     answer.dataset.answer = choice;
 
     const label = document.createElement("label");
-    label.setAttribute("for", `${choice}`);
-    label.textContent = choice;
+    label.classList.add("quiz-answer-label");
+    label.setAttribute("for", `choice-${i}`);
 
-    form.appendChild(answer);
+    const radioControl = document.createElement("span");
+    radioControl.classList.add("radio__control");
+
+    const radioInput = document.createElement("span");
+    radioInput.classList.add("radio__input");
+
+    const radioLabel = document.createElement("span");
+    radioLabel.classList.add("radio__label");
+    radioLabel.textContent = choice;
+
+    radioInput.appendChild(answer);
+    radioInput.appendChild(radioControl);
+    label.appendChild(radioInput);
+    label.appendChild(radioLabel);
     form.appendChild(label);
   });
 
   form.appendChild(submitBtn);
   quiz.appendChild(nextChapterBtn);
   quiz.appendChild(form);
+  section.appendChild(quiz);
 
-  return quiz;
+  return section;
 };
 
 /***********************  dummy quizInfo ***********************

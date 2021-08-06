@@ -21,42 +21,42 @@ import stairs from "../../../images/dnd/1.5/stairs.svg";
 
 const chapterOneImages = [
   { cssClass: "drop-container", url: trees },
-  { cssClass: "right drag-item-1", url: trees },
-  { cssClass: "wrong drag-item-2", url: building },
-  { cssClass: "wrong drag-item-3", url: house },
-  { cssClass: "wrong drag-item-4", url: pond },
+  { cssClass: "right", url: trees },
+  { cssClass: "wrong", url: building },
+  { cssClass: "wrong", url: house },
+  { cssClass: "wrong", url: pond },
 ];
 
 const chapterTwoImages = [
   { cssClass: "drop-container", url: newspaper },
-  { cssClass: "right drag-item-1", url: newspaper },
-  { cssClass: "wrong drag-item-2", url: paper },
-  { cssClass: "wrong drag-item-3", url: fabric },
-  { cssClass: "wrong drag-item-4", url: book },
+  { cssClass: "right", url: newspaper },
+  { cssClass: "wrong", url: paper },
+  { cssClass: "wrong", url: fabric },
+  { cssClass: "wrong", url: book },
 ];
 
 const chapterThreeImages = [
   { cssClass: "drop-container", url: kiteRainbow },
-  { cssClass: "right drag-item-1", url: kiteRainbow },
-  { cssClass: "wrong drag-item-2", url: kitePink },
-  { cssClass: "wrong drag-item-3", url: kiteOrange },
-  { cssClass: "wrong drag-item-4", url: kiteBlue },
+  { cssClass: "right", url: kiteRainbow },
+  { cssClass: "wrong", url: kitePink },
+  { cssClass: "wrong", url: kiteOrange },
+  { cssClass: "wrong", url: kiteBlue },
 ];
 
 const chapterFourImages = [
   { cssClass: "drop-container", url: houseRed },
-  { cssClass: "right drag-item-1", url: houseRed },
-  { cssClass: "wrong drag-item-2", url: buildingPink },
-  { cssClass: "wrong drag-item-3", url: hospital },
-  { cssClass: "wrong drag-item-4", url: houseBlue },
+  { cssClass: "right", url: houseRed },
+  { cssClass: "wrong", url: buildingPink },
+  { cssClass: "wrong", url: hospital },
+  { cssClass: "wrong", url: houseBlue },
 ];
 
 const chapterFiveImages = [
   { cssClass: "drop-container", url: ladder },
-  { cssClass: "right drag-item-1", url: ladder },
-  { cssClass: "wrong drag-item-2", url: hammer },
-  { cssClass: "wrong drag-item-3", url: rope },
-  { cssClass: "wrong drag-item-4", url: stairs },
+  { cssClass: "right", url: ladder },
+  { cssClass: "wrong", url: hammer },
+  { cssClass: "wrong", url: rope },
+  { cssClass: "wrong", url: stairs },
 ];
 
 export {
