@@ -81,9 +81,9 @@ h6 {
   grid-row: 6 / 7;
 }
 
-/* #how-to-play-button {
-  grid-row: 7 / 8;
-} */
+#how-to-play-button {
+  grid-row: 8 / 9;
+}
 
 #chaptersIndex-button {
   grid-row: 7 / 8;
@@ -415,4 +415,20 @@ img {
 .message-container button:hover {
   transition: 0.5s;
   transform: scale(1.1);
+}
+
+#video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000ba;
+}
+
+#help-video {
+  width: 854px;
+  height: 480px;
 }

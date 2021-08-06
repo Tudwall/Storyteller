@@ -37,6 +37,10 @@ module.exports = {
             {
             test: /\.(ttf)$/,
             type: 'asset/resource',
+            },
+            {
+              test: /\.mp4$/,
+              use: 'file-loader',
             }
         ]
     }
