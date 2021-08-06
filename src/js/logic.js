@@ -5,6 +5,7 @@ import { quizComponent } from "./quiz-component";
 import { kiteStory } from "./stories/kite-story";
 import { startingPage } from "./starting-page";
 import { message } from "./success-message";
+import { chapterIndex } from "./chapterIndex";
 
 const gameLogic = (story) => {
   let answerCounter = 0;
@@ -82,7 +83,7 @@ const gameLogic = (story) => {
       return createChapterStructure(nextChapter, displayHome, () =>
         displayMessage(nextChapter)
       );
-    } else {
+    } else { 
       return startStoryQuiz();
     }
   };
@@ -90,11 +91,11 @@ const gameLogic = (story) => {
   const displayHome = () => {
     const storyLogic = gameLogic(kiteStory);
     const storyStart = storyLogic.startFirstChapter();
-    const startPage = startingPage(() => render(storyStart));
+    const startPage = startingPage(() => render(storyStart), null, () => render(chapterIndex(kiteStory, storyLogic)));
     render(startPage);
   };
 
-  return { startFirstChapter, displayMessage };
+  return { startFirstChapter, displayMessage, displayHome };
 };
 
 export { gameLogic };
