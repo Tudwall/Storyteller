@@ -1,3 +1,5 @@
+import { displayHelp } from "./help";
+
 const startingPage = (renderFunction, HtPRenderFunction, renderChapterIndexFn) => {
   const title = document.createElement("h1");
   title.id = "title";
@@ -14,11 +16,11 @@ const startingPage = (renderFunction, HtPRenderFunction, renderChapterIndexFn) =
   startGameBtn.textContent = "Start game";
   startGameBtn.addEventListener("click", renderFunction);
 
-  /* const HtPBtn = document.createElement("button");
+  const HtPBtn = document.createElement("button");
   HtPBtn.id = "how-to-play-button";
   HtPBtn.classList.add("home-button");
   HtPBtn.textContent = "How to play";
-  HtPBtn.addEventListener("click", HtPRenderFunction); */
+  HtPBtn.addEventListener("click", displayHelp);
 
   const mainMenu = document.createElement("div");
   mainMenu.id = "main-menu";
@@ -33,7 +35,7 @@ const startingPage = (renderFunction, HtPRenderFunction, renderChapterIndexFn) =
   mainMenu.appendChild(desc);
   mainMenu.appendChild(startGameBtn);
   mainMenu.appendChild(chaptersButton);
- // mainMenu.appendChild(HtPBtn);
+  mainMenu.appendChild(HtPBtn);
 
   return mainMenu;
 };
