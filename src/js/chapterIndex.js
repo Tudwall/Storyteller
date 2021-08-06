@@ -62,7 +62,7 @@ const chapterIndex = (story, storyLogic) => {
             chapterNode.className = "chapter";
 
             const text = document.createElement("p");
-            text.textContent = `Chapter ${currentChapterNumber} ${chapter.getCompletionStatus()}`;
+            text.textContent = `Chapter ${currentChapterNumber}`;
 
             const button = document.createElement("button");
             button.textContent = "Play";
@@ -88,7 +88,6 @@ const chapterIndex = (story, storyLogic) => {
             currentChapterNumber++;
         }
     }
-  }
 
     base.appendChild(text);
     base.appendChild(home_button);
