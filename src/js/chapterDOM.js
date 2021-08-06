@@ -2,7 +2,7 @@ import { makeDraggable, makeDroppable } from "./drag-drop";
 import homeImage from "../images/styling/home.png";
 import arrow from "../images/styling/arrow-right.png";
 
-const createChapterStructure = (chapterObj, callback) => {
+const createChapterStructure = (chapterObj, displayHome, callback) => {
   const hideStoryContent = () => {
     const story = document.querySelector(".chapter-story");
     const images = container.querySelectorAll(".picture");
@@ -15,11 +15,17 @@ const createChapterStructure = (chapterObj, callback) => {
     question.classList.toggle("hide");
   };
 
+  const randomize = (range, itemNumbers) => {
+    const randomIndex = Math.floor(Math.random()*range)
+    // return one entry of itemNumbers and delete that entry
+    return itemNumbers.splice(randomIndex, 1)[0]
+  }
+
   const createButtons = (hasImages) => {
     const homeButton = document.createElement("img");
     homeButton.classList.add("home");
     homeButton.src = homeImage;
-    //homeButton.addEventListener('click', showHomeScreen)
+    homeButton.addEventListener("click", displayHome);
 
     const nextChapterButton = document.createElement("img");
     nextChapterButton.classList.add("next");
@@ -48,28 +54,31 @@ const createChapterStructure = (chapterObj, callback) => {
     const container = document.createElement("div");
     const images = chapterObj.getImages();
 
+    let itemNumbers = [1, 2, 3, 4]
+    let counter = 4;
     for (let image of images) {
-      const classArr = image.cssClass.split(" ");
 
       const picture = document.createElement("img");
       picture.src = image.url;
 
       const pictureContainer = document.createElement("div");
-      pictureContainer.classList.add("picture");
-      pictureContainer.classList.add(classArr[0]);
-      pictureContainer.classList.add(classArr[1]);
+      pictureContainer.classList.add("picture")
+      pictureContainer.classList.add(image.cssClass);
       pictureContainer.append(picture);
 
-      if (picture.className !== "drop-container") {
+      if (!pictureContainer.classList.contains("drop-container")) {
+        pictureContainer.classList.add(`drag-item-${randomize(counter, itemNumbers)}`)
         makeDraggable(pictureContainer, container);
       }
 
       container.append(pictureContainer);
+      counter--
     }
 
     makeDroppable(
       container.querySelector(".right"),
       container.querySelector(".drop-container"),
+      container,
       () => callback(chapterObj)
     );
 

@@ -48,58 +48,51 @@ const chapterIndex = (story, storyLogic) => {
   }
 
   /*Makes sure chapterNodes are appended in order, based on chapterNumber. Starts at 1, ends at last chapter 
-    (or while loop breaks if it cannot find chapter with currentChapterNumber)
-    */
+    (or while loop breaks if it cannot find chapter with currentChapterNumber)    */    
 
-  while (story.getChapters().length !== currentChapterNumber - 1) {
-    let chapter = story
-      .getChapters()
-      .find((chapter) => chapter.getChapterNumber() == currentChapterNumber);
+    while (story.getChapters().length !== currentChapterNumber-1) {
+        let chapter = story.getChapters().find(chapter => chapter.getChapterNumber() == currentChapterNumber);
 
-    if (chapter == undefined) {
-      //there is a chapter missing.
-      break;
-    } else {
-      const chapterNode = document.createElement("div");
-      chapterNode.className = "chapter";
+        if (chapter == undefined) {
+            //there is a chapter missing. 
+            break;
+        } else {
 
-      const text = document.createElement("p");
-      text.textContent = `Chapter ${currentChapterNumber}`;
+            const chapterNode = document.createElement("div");
+            chapterNode.className = "chapter";
 
-      const button = document.createElement("button");
-      button.textContent = "Play";
-      button.classList.add("play-chapter-button");
-      button.addEventListener("click", () => {
-        render(
-          createChapterStructure(chapter, () =>
-            storyLogic.displayMessage(chapter)
-          )
-        );
-      });
+            const text = document.createElement("p");
+            text.textContent = `Chapter ${currentChapterNumber} ${chapter.getCompletionStatus()}`;
 
-      // ONLY unlock "play" button for chapters up to latestChapterNumber (which is the last completed chapter) + 1";
-      if (currentChapterNumber <= latestChapterNumber + 1) {
-        //button enabled by default.
-      } else {
-        button.disabled = true;
-        button.textContent = "Locked";
-        button.classList.add("disabled-button");
-      }
+            const button = document.createElement("button");
+            button.textContent = "Play";
+            button.classList.add("play-chapter-button");
+            button.addEventListener("click", () => {
+                render(createChapterStructure(chapter, storyLogic.displayHome, () => storyLogic.displayMessage(chapter)));
+            });
 
-      chapterNode.appendChild(text);
-      chapterNode.appendChild(button);
+            // ONLY unlock "play" button for chapters up to latestChapterNumber (which is the last completed chapter) + 1";
+            if (currentChapterNumber <= latestChapterNumber + 1) {
+                //button enabled by default. 
+            } else {
+                button.disabled = true;
+                button.textContent = "Locked";
+                button.classList.add("disabled-button");
+            }
+        
+            chapterNode.appendChild(text);
+            chapterNode.appendChild(button);
 
-      chaptersContainer.appendChild(chapterNode);
+            chaptersContainer.appendChild(chapterNode);   
 
-      currentChapterNumber++;
+            currentChapterNumber++;
+        }
     }
   }
 
-  console.log(latestChapterNumber);
-
-  base.appendChild(text);
-  base.appendChild(home_button);
-  base.appendChild(chaptersContainer);
+    base.appendChild(text);
+    base.appendChild(home_button);
+    base.appendChild(chaptersContainer);
 
   return base;
 };
