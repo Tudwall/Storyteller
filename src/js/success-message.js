@@ -1,4 +1,4 @@
-const message = (chapterEnd, messageContent) => {
+const message = (messageContent, chapterEnd) => {
   const messageContainer = document.createElement("div");
   messageContainer.classList.add("message-container");
 
@@ -7,7 +7,14 @@ const message = (chapterEnd, messageContent) => {
 
   const nextBtn = document.createElement("button");
   nextBtn.textContent = "Continue";
-  nextBtn.addEventListener("click", chapterEnd);
+
+  if (chapterEnd) {
+    nextBtn.addEventListener("click", chapterEnd);
+  } else {
+    nextBtn.addEventListener("click", () => {
+      messageContainer.remove();
+    });
+  }
 
   messageContainer.append(message, nextBtn);
 

@@ -46,13 +46,19 @@ const gameLogic = (story) => {
   };
 
   const handleWrongAnswer = (answer, end) => {
+    const tryAgain =
+      "Unfortunately, your answer was wrong but you can try again!";
+    const finalAnswer = `Right answer was "${answer}"`;
+
     if (answerCounter < 2) {
       answerCounter++;
-      alert("Wrong answer, try again");
+      render(message(tryAgain), false);
     } else {
-      alert(`Right answer was ${answer}`);
       answerCounter = 0;
-      questionCompleted(end);
+      render(
+        message(finalAnswer, () => questionCompleted(end)),
+        false
+      );
     }
   };
 
@@ -70,9 +76,8 @@ const gameLogic = (story) => {
       "Congratulations! You finished this part of the story and now you can go to the next by clicking button below!";
 
     if (generateNextChapter) {
-      const setMessage = message(
-        () => render(generateNextChapter),
-        messageText
+      const setMessage = message(messageText, () =>
+        render(generateNextChapter)
       );
       render(setMessage, false);
     }
