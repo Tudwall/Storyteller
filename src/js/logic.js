@@ -30,24 +30,40 @@ const gameLogic = (story) => {
     let answerValue = checkedInput.dataset.answer;
 
     if (rightAnswer === answerValue) {
-      quiz.setPassed();
-      const getQuiz = story.getFinalQuizzes();
-
-      if (!getQuiz) {
-        story.setCompletionStatus();
-        render(storyEnd);
-      } else {
-        startStoryQuiz();
-      }
+      questionCompleted(storyEnd);
     } else {
-      if (answerCounter < 2) {
-        answerCounter++;
-        alert("Wrong answer, try again");
-      } else {
-        alert(`Right answer was ${rightAnswer}`);
-        answerCounter = 0;
-        render(storyEnd);
-      }
+      handleWrongAnswer(rightAnswer, storyEnd);
+    }
+  };
+
+  const questionCompleted = (end) => {
+    const getQuiz = story.getFinalQuizzes();
+    getQuiz.setPassed();
+
+    const isAllPassed = story.allPassed();
+
+    if (isAllPassed) {
+      story.setCompletionStatus();
+      render(end);
+    } else {
+      startStoryQuiz(getQuiz);
+    }
+  };
+
+  const handleWrongAnswer = (answer, end) => {
+    const tryAgain =
+      "Unfortunately, your answer was wrong but you can try again!";
+    const finalAnswer = `Right answer was "${answer}"`;
+
+    if (answerCounter < 2) {
+      answerCounter++;
+      render(message(tryAgain), false);
+    } else {
+      answerCounter = 0;
+      render(
+        message(finalAnswer, () => questionCompleted(end)),
+        false
+      );
     }
   };
 
@@ -66,9 +82,8 @@ const gameLogic = (story) => {
       "Congratulations! You finished this part of the story and now you can go to the next by clicking button below!";
 
     if (generateNextChapter) {
-      const setMessage = message(
-        () => render(generateNextChapter),
-        messageText
+      const setMessage = message(messageText, () =>
+        render(generateNextChapter)
       );
       render(setMessage, false);
     }

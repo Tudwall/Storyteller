@@ -19,7 +19,7 @@ const chapterFour = Chapter(chp_4, 4, chapterFourImages, qs_4);
 const chapterFive = Chapter(chp_5, 5, chapterFiveImages, qs_5);
 const chapterSix = Chapter(chp_6, 6);
 
-const storyQuizzes = QuizSummary(quizArray).quizzes;
+const storyQuizzes = QuizSummary(quizArray);
 
 const kiteStory = Story("Kite story", storyQuizzes);
 kiteStory.addChapters(
@@ -28,7 +28,7 @@ kiteStory.addChapters(
   chapterThree,
   chapterFour,
   chapterFive,
-  chapterSix,
+  chapterSix
 );
 
 export { kiteStory };

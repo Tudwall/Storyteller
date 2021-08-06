@@ -7,11 +7,16 @@ const Quiz = (question, choices, answer) => {
   const setPassed = () => (passed = !passed);
   const getPassed = () => passed;
 
-  return { getQuestion, getChoices, getAnswer, setPassed, getPassed };
+  return {
+    getQuestion,
+    getChoices,
+    getAnswer,
+    setPassed,
+    getPassed,
+  };
 };
 
 const QuizSummary = (quizArray) => {
-  let passed = false;
   let quizzes = [];
 
   for (let i = 0; i < quizArray.length; i++) {
@@ -23,16 +28,7 @@ const QuizSummary = (quizArray) => {
     quizzes.push(quiz);
   }
 
-  const allPassed = () => {
-    for (let i = 0; i < quizzes.length; i++) {
-      if (quizzes[i].passed == false) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  return { quizzes, allPassed };
+  return quizzes;
 };
 
 export { Quiz, QuizSummary };
