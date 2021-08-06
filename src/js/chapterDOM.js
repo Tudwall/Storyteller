@@ -122,6 +122,15 @@ const createChapterStructure = (chapterObj, callback) => {
       section.append(textContainer);
     }
 
+    let index = 1;
+
+    const writeStory = () => {
+      story.textContent = chapterObj.getStory().slice(0, index);
+      index++;
+    };
+
+    setInterval(writeStory, 35);
+
     return section;
   };
 
