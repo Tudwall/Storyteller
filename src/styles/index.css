@@ -86,7 +86,6 @@ h6 {
 } */
 
 #chaptersIndex-button {
-
   grid-row: 7 / 8;
 }
 
@@ -99,6 +98,8 @@ section {
   padding: 50px 120px;
 }
 
+#drag-container,
+#quiz-container,
 #container {
   display: grid;
   grid-template-rows: repeat(10, 71.2px);
@@ -117,7 +118,19 @@ section {
   cursor: pointer;
 }
 
-.chapter-title {
+#quiz-container {
+  display: grid;
+}
+
+#quiz-form {
+  grid-row: 3 / 5;
+  grid-column: 1 / 11;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.chapter-title,
+#quiz-title {
   grid-row: 1 / 2;
   grid-column: 1 / 11;
   font-size: 65px;
@@ -220,6 +233,77 @@ img {
   background: rgba(58, 226, 36, 0.2);
 }
 
+/* QUIZ */
+
+#quiz-question {
+  grid-column: 1 / 3;
+  font-size: 25px;
+  color: #402218;
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.5);
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+}
+
+#quiz-form > label {
+  font-size: 20px;
+  color: #402218;
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.5);
+  margin: 20px;
+}
+
+#quiz-submit-btn {
+  grid-column: 1 / 3;
+  margin-top: 40px;
+}
+
+.quiz-answer-label {
+  display: flex;
+  cursor: pointer;
+}
+
+.radio__input {
+  display: flex;
+}
+
+.radio__input > input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio__input > input:checked + .radio__control {
+  background: #402218;
+}
+
+.radio__control {
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 25%;
+  border: 0.1em solid #402218;
+  transform: translateY(-0.05em);
+  margin-right: 5px;
+}
+
+.radio__label {
+  line-height: 1;
+}
+
+#quiz-submit-btn {
+  cursor: pointer;
+  margin-top: 40px;
+  font-size: 20px;
+  background-color: #c68b59;
+  border: none;
+  padding-bottom: 8px;
+  transition: all 0.5s ease-in-out;
+}
+
+#quiz-submit-btn:hover {
+  transform: scale(1.1);
+}
+
 /* CHAPTERS INDEX  */
 
 #chapter-index {
@@ -262,7 +346,6 @@ img {
   border-radius: 10px;
   background-color: rgb(228, 199, 146);
   text-align: center;
-  
 }
 
 #chapters-container {
@@ -282,9 +365,11 @@ img {
 }
 
 .smooth-drop {
-  transition: left 350ms cubic-bezier(0.49, 0.02, 0.46, 1.74), 
-              top 350ms cubic-bezier(0.49, 0.02, 0.46, 1.74);
+  transition: left 350ms cubic-bezier(0.49, 0.02, 0.46, 1.74),
+    top 350ms cubic-bezier(0.49, 0.02, 0.46, 1.74);
 }
+
+/* SUCCESS MESSAGE */
 
 .message-container {
   position: absolute;
