@@ -72,7 +72,7 @@ const chapterIndex = (story, storyLogic) => {
             button.textContent = "Play";
             button.classList.add("play-chapter-button");
             button.addEventListener("click", () => {
-                render(createChapterStructure(chapter, () => storyLogic.displayMessage(chapter)));
+                render(createChapterStructure(chapter, storyLogic.displayHome, () => storyLogic.displayMessage(chapter)));
             });
 
             // ONLY unlock "play" button for chapters up to latestChapterNumber (which is the last completed chapter) + 1";
@@ -92,8 +92,6 @@ const chapterIndex = (story, storyLogic) => {
             currentChapterNumber++;
         }
     }
-
-    console.log(latestChapterNumber);
 
     base.appendChild(text);
     base.appendChild(home_button);
