@@ -50,6 +50,7 @@ const gameLogic = (story) => {
       } else {
         alert(`Right answer was ${rightAnswer}`);
         answerCounter = 0;
+        render(storyEnd);
       }
     }
   };
