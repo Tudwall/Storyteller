@@ -4,14 +4,14 @@ import arrow from "../images/styling/arrow-right.png";
 
 const createChapterStructure = (chapterObj, displayHome, callback) => {
   const hideStoryContent = () => {
-    const story = document.querySelector("p");
+    const story = document.querySelector(".chapter-story");
     const images = container.querySelectorAll(".picture");
-    const nextButton = document.querySelector(".next");
+    const nextContainer = document.querySelector(".next-container");
     const question = document.querySelector(".chapter-question");
 
     story.classList.toggle("hide");
     images.forEach((img) => img.classList.toggle("hide"));
-    nextButton.classList.toggle("hide");
+    nextContainer.classList.toggle("hide");
     question.classList.toggle("hide");
   };
 
@@ -31,13 +31,23 @@ const createChapterStructure = (chapterObj, displayHome, callback) => {
     nextChapterButton.classList.add("next");
     nextChapterButton.src = arrow;
 
+    const containerText = document.createElement("p");
+    containerText.classList.add("container-text");
+    containerText.textContent = "NEXT";
+
+    const nextChapterContainer = document.createElement("div");
+    nextChapterContainer.classList.add("next-container");
+    nextChapterContainer.append(nextChapterButton, containerText);
+
     if (hasImages) {
-      nextChapterButton.addEventListener("click", hideStoryContent);
+      nextChapterContainer.addEventListener("click", hideStoryContent);
     } else {
-      nextChapterButton.addEventListener("click", () => callback(chapterObj));
+      nextChapterContainer.addEventListener("click", () =>
+        callback(chapterObj)
+      );
     }
 
-    return { homeButton, nextChapterButton };
+    return { homeButton, nextChapterContainer };
   };
 
   const setupImages = () => {
@@ -85,7 +95,7 @@ const createChapterStructure = (chapterObj, displayHome, callback) => {
     if (chapterObj.getImages() !== null) {
       //chapter has images and question.
 
-      const { homeButton, nextChapterButton } = createButtons(true);
+      const { homeButton, nextChapterContainer } = createButtons(true);
 
       const title = document.createElement("H1");
       title.classList.add("chapter-title");
@@ -98,7 +108,13 @@ const createChapterStructure = (chapterObj, displayHome, callback) => {
 
       const container = setupImages();
       container.id = "container";
-      container.append(homeButton, nextChapterButton, title, story, question);
+      container.append(
+        homeButton,
+        nextChapterContainer,
+        title,
+        story,
+        question
+      );
 
       const images = container.querySelectorAll(".picture");
       images.forEach((img) => img.classList.add("hide"));
@@ -106,14 +122,23 @@ const createChapterStructure = (chapterObj, displayHome, callback) => {
       section.append(container);
     } else {
       //chapter is text only.
-      const { homeButton, nextChapterButton } = createButtons(false);
+      const { homeButton, nextChapterContainer } = createButtons(false);
 
       const textContainer = document.createElement("div");
       textContainer.id = "container";
-      textContainer.append(homeButton, nextChapterButton, story);
+      textContainer.append(homeButton, nextChapterContainer, story);
 
       section.append(textContainer);
     }
+
+    let index = 1;
+
+    const writeStory = () => {
+      story.textContent = chapterObj.getStory().slice(0, index);
+      index++;
+    };
+
+    setInterval(writeStory, 35);
 
     return section;
   };

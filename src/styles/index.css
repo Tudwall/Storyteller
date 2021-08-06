@@ -212,9 +212,38 @@ img {
   grid-column: 9 / 10;
 }
 
-.next {
+.next-container {
+  position: relative;
   grid-row: 9 / 10;
   grid-column: 9 / 10;
+}
+
+.next-container:hover {
+  animation: backandforth 1s ease-in-out 0s;
+}
+
+@keyframes backandforth {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 10%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.container-text {
+  color: #402218;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  left: 14px;
+  font-size: 18px;
+}
+
+.next {
   width: 120px;
   height: 80px;
   cursor: pointer;
