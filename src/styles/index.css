@@ -203,6 +203,22 @@ img {
   grid-column: 9 / 10;
 }
 
+.next-container:hover {
+  animation: backandforth 1s ease-in-out 0s;
+}
+
+@keyframes backandforth {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 10%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
 .container-text {
   color: #402218;
   cursor: pointer;
