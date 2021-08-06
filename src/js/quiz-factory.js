@@ -4,7 +4,7 @@ const Quiz = (question, choices, answer) => {
   const getQuestion = () => question;
   const getChoices = () => choices;
   const getAnswer = () => choices[answer];
-  const setPassed = () => (passed = !passed);
+  const setPassed = () => (passed = true);
   const getPassed = () => passed;
 
   return { getQuestion, getChoices, getAnswer, setPassed, getPassed };

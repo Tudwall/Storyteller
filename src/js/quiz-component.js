@@ -15,7 +15,7 @@ const quizComponent = (quizInfo, callback) => {
 
   // Here goes the function declared in the game logic module. Which handles the good and bad answers.
   submitBtn.addEventListener("click", () => {
-    callback(quizInfo);
+    callback();
   });
 
   const quiz = document.createElement("div");

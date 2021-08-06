@@ -9,6 +9,7 @@ import { chapterIndex } from "./chapterIndex";
 
 const gameLogic = (story) => {
   let answerCounter = 0;
+  let quizIndex = 0;
 
   const startFirstChapter = () => {
     const firstChapter = story.getChapter(1);
@@ -22,7 +23,8 @@ const gameLogic = (story) => {
     return createStoryEnd(storyTitle, displayHome);
   };
 
-  const checkQuizAnswer = (quiz) => {
+  const checkQuizAnswer = (quiz, nextQuizIndex) => {
+
     const checkedInput = document.querySelector('input[type="radio"]:checked');
     const rightAnswer = quiz.getAnswer();
     const storyEnd = endStory();
@@ -31,13 +33,15 @@ const gameLogic = (story) => {
 
     if (rightAnswer === answerValue) {
       quiz.setPassed();
-      const getQuiz = story.getFinalQuizzes();
+ 
+      const getQuiz = story.getFinalQuizzes(nextQuizIndex);
 
       if (!getQuiz) {
         story.setCompletionStatus();
         render(storyEnd);
       } else {
-        startStoryQuiz();
+
+        startStoryQuiz(nextQuizIndex);
       }
     } else {
       if (answerCounter < 2) {
@@ -46,14 +50,14 @@ const gameLogic = (story) => {
       } else {
         alert(`Right answer was ${rightAnswer}`);
         answerCounter = 0;
-        render(storyEnd);
       }
     }
   };
 
-  const startStoryQuiz = () => {
-    const getQuiz = story.getFinalQuizzes();
-    const displayQuiz = quizComponent(getQuiz, checkQuizAnswer);
+  const startStoryQuiz = (quizIndex) => {
+    //fetch quiz based on it's index in quizzes array. 
+    const getQuiz = story.getFinalQuizzes(quizIndex);
+    const displayQuiz = quizComponent(getQuiz, () => checkQuizAnswer(getQuiz, quizIndex+1));
 
     render(displayQuiz);
   };
@@ -84,7 +88,8 @@ const gameLogic = (story) => {
         displayMessage(nextChapter)
       );
     } else { 
-      return startStoryQuiz();
+      //quiz index starts at 0. 
+      return startStoryQuiz(quizIndex);
     }
   };
 

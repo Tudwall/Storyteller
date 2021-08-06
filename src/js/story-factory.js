@@ -28,10 +28,15 @@ const Story = (title, quizzes) => {
     return null;
   };
 
-  const getFinalQuizzes = () => {
-    return quizzes.find((quiz) => {
-      return quiz.getPassed() === false;
-    });
+  const getFinalQuizzes = (index) => {
+    //quiz, fetch by index. in quizzes array. do not care if completed or not. 
+    // return quizzes.find((quiz) => {
+    //   return quiz.getPassed() === false;
+    // });
+    if (quizzes[index]) {
+      return quizzes[index];
+    }
+    return null;
   };
 
   const getTitle = () => title;
