@@ -32,20 +32,20 @@ const gameLogic = (story) => {
     let answerValue = checkedInput.dataset.answer;
 
     if (rightAnswer === answerValue) {
+      //set quiz to passed, only if answer is correct. 
+      quiz.setPassed();
       questionCompleted(storyEnd, nextQuizIndex);
     } else {
-      handleWrongAnswer(rightAnswer, storyEnd, nextQuixIndex);
+      handleWrongAnswer(rightAnswer, storyEnd, nextQuizIndex);
     }
   };
 
   const questionCompleted = (end, nextQuizIndex) => {
     const getQuiz = story.getFinalQuizzes(nextQuizIndex);
-    
-    const isAllPassed = story.allPassed();
-    
-    //if next quiz not found and story passed.
-    if (!getQuiz && isAllPassed) {
-      getQuiz.setPassed();
+
+    // if there are no next quizzes. 
+    if (!getQuiz) {
+      //even if one or more quiz are failed, story will be marked as complete anyways. 
       story.setCompletionStatus();
       render(end);
     } else {
