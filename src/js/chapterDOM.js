@@ -60,6 +60,7 @@ const createChapterStructure = (chapterObj, displayHome, callback) => {
 
       const picture = document.createElement("img");
       picture.src = image.url;
+      picture.draggable = false;
 
       const pictureContainer = document.createElement("div");
       pictureContainer.classList.add("picture")
