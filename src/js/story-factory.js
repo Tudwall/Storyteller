@@ -35,6 +35,17 @@ const Story = (title, quizzes) => {
     return null;
   };
 
+  const allPassed = () => {
+    for (let i = 0; i < quizzes.length; i++) {
+      const quizzPassed = quizzes[i].getPassed();
+
+      if (quizzPassed == false) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const getTitle = () => title;
   const getChapters = () => chapters;
   const setCompletionStatus = () => (completed = !completed);
@@ -48,6 +59,7 @@ const Story = (title, quizzes) => {
     setCompletionStatus,
     getCompletionStatus,
     getFinalQuizzes,
+    allPassed,
     getChapter,
   };
 };

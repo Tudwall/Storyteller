@@ -32,26 +32,41 @@ const gameLogic = (story) => {
     let answerValue = checkedInput.dataset.answer;
 
     if (rightAnswer === answerValue) {
-      quiz.setPassed();
- 
-      const getQuiz = story.getFinalQuizzes(nextQuizIndex);
-
-      if (!getQuiz) {
-        story.setCompletionStatus();
-        render(storyEnd);
-      } else {
-
-        startStoryQuiz(nextQuizIndex);
-      }
+      questionCompleted(storyEnd, nextQuizIndex);
     } else {
-      if (answerCounter < 2) {
-        answerCounter++;
-        alert("Wrong answer, try again");
-      } else {
-        alert(`Right answer was ${rightAnswer}`);
-        answerCounter = 0;
-        render(storyEnd);
-      }
+      handleWrongAnswer(rightAnswer, storyEnd, nextQuixIndex);
+    }
+  };
+
+  const questionCompleted = (end, nextQuizIndex) => {
+    const getQuiz = story.getFinalQuizzes(nextQuizIndex);
+    
+    const isAllPassed = story.allPassed();
+    
+    //if next quiz not found and story passed.
+    if (!getQuiz && isAllPassed) {
+      getQuiz.setPassed();
+      story.setCompletionStatus();
+      render(end);
+    } else {
+      startStoryQuiz(nextQuizIndex);
+    }
+  };
+
+  const handleWrongAnswer = (answer, end, nextQuizIndex) => {
+    const tryAgain =
+      "Unfortunately, your answer was wrong but you can try again!";
+    const finalAnswer = `Right answer was "${answer}"`;
+
+    if (answerCounter < 2) {
+      answerCounter++;
+      render(message(tryAgain), false);
+    } else {
+      answerCounter = 0;
+      render(
+        message(finalAnswer, () => questionCompleted(end, nextQuizIndex)),
+        false
+      );
     }
   };
 
@@ -71,9 +86,8 @@ const gameLogic = (story) => {
       "Congratulations! You finished this part of the story and now you can go to the next by clicking button below!";
 
     if (generateNextChapter) {
-      const setMessage = message(
-        () => render(generateNextChapter),
-        messageText
+      const setMessage = message(messageText, () =>
+        render(generateNextChapter)
       );
       render(setMessage, false);
     }
