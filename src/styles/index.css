@@ -177,6 +177,7 @@ img {
 }
 
 .drop-container img {
+  -webkit-user-drag: none;
   opacity: 0;
 }
 
