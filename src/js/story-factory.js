@@ -28,10 +28,11 @@ const Story = (title, quizzes) => {
     return null;
   };
 
-  const getFinalQuizzes = () => {
-    return quizzes.find((quiz) => {
-      return quiz.getPassed() === false;
-    });
+  const getFinalQuizzes = (index) => {
+    if (quizzes[index]) {
+      return quizzes[index];
+    }
+    return null;
   };
 
   const allPassed = () => {

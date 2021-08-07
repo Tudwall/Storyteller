@@ -9,6 +9,7 @@ import { chapterIndex } from "./chapterIndex";
 
 const gameLogic = (story) => {
   let answerCounter = 0;
+  let quizIndex = 0;
 
   const startFirstChapter = () => {
     const firstChapter = story.getChapter(1);
@@ -22,7 +23,8 @@ const gameLogic = (story) => {
     return createStoryEnd(storyTitle, displayHome);
   };
 
-  const checkQuizAnswer = (quiz) => {
+  const checkQuizAnswer = (quiz, nextQuizIndex) => {
+
     const checkedInput = document.querySelector('input[type="radio"]:checked');
     const rightAnswer = quiz.getAnswer();
     const storyEnd = endStory();
@@ -30,27 +32,28 @@ const gameLogic = (story) => {
     let answerValue = checkedInput.dataset.answer;
 
     if (rightAnswer === answerValue) {
-      questionCompleted(storyEnd);
+      //set quiz to passed, only if answer is correct. 
+      quiz.setPassed();
+      questionCompleted(storyEnd, nextQuizIndex);
     } else {
-      handleWrongAnswer(rightAnswer, storyEnd);
+      handleWrongAnswer(rightAnswer, storyEnd, nextQuizIndex);
     }
   };
 
-  const questionCompleted = (end) => {
-    const getQuiz = story.getFinalQuizzes();
-    getQuiz.setPassed();
+  const questionCompleted = (end, nextQuizIndex) => {
+    const getQuiz = story.getFinalQuizzes(nextQuizIndex);
 
-    const isAllPassed = story.allPassed();
-
-    if (isAllPassed) {
+    // if there are no next quizzes. 
+    if (!getQuiz) {
+      //even if one or more quiz are failed, story will be marked as complete anyways. 
       story.setCompletionStatus();
       render(end);
     } else {
-      startStoryQuiz(getQuiz);
+      startStoryQuiz(nextQuizIndex);
     }
   };
 
-  const handleWrongAnswer = (answer, end) => {
+  const handleWrongAnswer = (answer, end, nextQuizIndex) => {
     const tryAgain =
       "Unfortunately, your answer was wrong but you can try again!";
     const finalAnswer = `Right answer was "${answer}"`;
@@ -61,15 +64,16 @@ const gameLogic = (story) => {
     } else {
       answerCounter = 0;
       render(
-        message(finalAnswer, () => questionCompleted(end)),
+        message(finalAnswer, () => questionCompleted(end, nextQuizIndex)),
         false
       );
     }
   };
 
-  const startStoryQuiz = () => {
-    const getQuiz = story.getFinalQuizzes();
-    const displayQuiz = quizComponent(getQuiz, checkQuizAnswer);
+  const startStoryQuiz = (quizIndex) => {
+    //fetch quiz based on it's index in quizzes array. 
+    const getQuiz = story.getFinalQuizzes(quizIndex);
+    const displayQuiz = quizComponent(getQuiz, () => checkQuizAnswer(getQuiz, quizIndex+1));
 
     render(displayQuiz);
   };
@@ -99,7 +103,8 @@ const gameLogic = (story) => {
         displayMessage(nextChapter)
       );
     } else { 
-      return startStoryQuiz();
+      //quiz index starts at 0. 
+      return startStoryQuiz(quizIndex);
     }
   };
 
